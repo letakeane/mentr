@@ -2,14 +2,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const environment = process.env.NODE_ENV || 'development';
-const configuration = require('./knexfile')[environment];
+const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/app`));
 app.use((req, res, next) => {
    res.header('Access-Control-Allow-Origin', '*');
    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
@@ -22,7 +22,8 @@ app.set('port', process.env.PORT || 1701);
 app.locals.title = 'mentr';
 
 app.get('/', (request, response) => {
-  response.sendFile('index.html')
+console.log(__dirname);
+  response.sendFile('/index.html')
   // response.sendFile('./styles/index.scss')
   // response.sendFile('./scripts/index.js')
 })
