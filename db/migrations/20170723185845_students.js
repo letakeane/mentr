@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
       table.string('stack_interests');
       table.integer('program_id').unsigned();
       table.foreign('program_id').references('programs.id');
-      table.timestamps();
+      table.timestamps(true, true);
     }),
   ]);
 };

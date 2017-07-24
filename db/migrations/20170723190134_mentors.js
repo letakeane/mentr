@@ -15,7 +15,7 @@ exports.up = function (knex, Promise) {
       table.string('dev_type');
       table.string('stack');
       table.string('pairing_location');
-      table.timestamps();
+      table.timestamps(true, true);
     }),
   ]);
 };
