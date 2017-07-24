@@ -1,9 +1,10 @@
 const programs = require('../seedData/programs.js');
 
 const createProgram = (knex, program) => {
+  const { program_name, module } = program;
   return knex('programs').insert({
-    program_name: program.program_name,
-    module: program.module
+    program_name,
+    module
   }, 'id');
 };
 
