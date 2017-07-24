@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 app.set('port', process.env.PORT || 1701);
 
-app.locals.title = 'mentr';
+app.locals.title = 'Mentr';
 
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
