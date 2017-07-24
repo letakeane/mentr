@@ -6,6 +6,8 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 const path = require('path');
+const config = require('dotenv').config().parsed;
+const clientId = config.CLIENT_ID;
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,8 +43,12 @@ if(process.env.NODE_ENV !== 'production') {
   }))
 }
 
+app.get('/authenticate', (request, response) => {
+  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`)
+})
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
-})
+});
 
 module.exports = app;
