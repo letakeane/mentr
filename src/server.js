@@ -5,11 +5,11 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 const domain = process.env.DOMAIN_ENV || 'localhost:1701';
+const path = require('path');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(`${__dirname}/app`));
 app.use((req, res, next) => {
    res.header('Access-Control-Allow-Origin', '*');
    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
@@ -22,11 +22,24 @@ app.set('port', process.env.PORT || 1701);
 app.locals.title = 'mentr';
 
 app.get('/', (request, response) => {
-console.log(__dirname);
-  response.sendFile('/index.html')
+  response.sendFile('/Users/leta/Turing/mod4/mentr/app/index.html')
   // response.sendFile('./styles/index.scss')
   // response.sendFile('./scripts/index.js')
 })
+
+if(process.env.NODE_ENV !== 'production') {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const config = require('../webpack.config.js');
+  const compiler = webpack(config);
+
+  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }))
+}
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
