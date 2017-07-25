@@ -79,15 +79,16 @@ app.get('/api/v1/students', (request, response) => {
 
 app.get('/api/v1/programs', (request, response) => {
   database('programs').select()
-    .then(programs => {
-      if (programs) {
+    .then((programs) => {
+      if (programs.length) {
         response.status(200).json(programs)
-      }
-      return response.status(404).json({
-        error: 'There were no programs found!'
-      })
+      } else {
+        return response.status(404).json({
+          error: 'There were no programs found!'
+        })
+      };
     })
-    .catch(error => {
+    .catch((error) => {
       response.status(500).json({ error })
     });
 });
@@ -99,10 +100,11 @@ app.get('/api/v1/mentors/:id', (request, response) => {
     .then(mentor => {
       if (mentor) {
         response.status(200).json(mentor)
-      }
-      return response.status(404).json({
-        error: 'We could not find that mentor!'
-      })
+      } else {
+        return response.status(404).json({
+          error: 'We could not find that mentor!'
+        })
+      };
     })
     .catch(error => {
       response.status(500).json({ error })
@@ -116,10 +118,11 @@ app.get('/api/v1/students/:id', (request, response) => {
     .then(student => {
       if (student) {
         response.status(200).json(student)
-      }
-      return response.status(404).json({
-        error: 'We could not find that student!'
-      })
+      } else {
+        return response.status(404).json({
+          error: 'We could not find that student!'
+        })
+      };
     })
     .catch(error => {
       response.status(500).json({ error })
@@ -133,10 +136,11 @@ app.get('/api/v1/programs/:id', (request, response) => {
     .then(program => {
       if (program) {
         response.status(200).json(program)
-      }
-      return response.status(404).json({
-        error: 'We could not find that program!'
-      })
+      } else {
+        return response.status(404).json({
+          error: 'We could not find that program!'
+        })
+      };
     })
     .catch(error => {
       response.status(500).json({ error })
