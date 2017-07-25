@@ -85,7 +85,7 @@ export default class AddMentor extends Component {
           value={this.state.location}
           onChange={event => this.updateProperty(event)}
         />
-        {/* <input
+        <input
           type="text"
           name="preferred_contact"
           placeholder="Preferred Contact"
@@ -168,7 +168,7 @@ export default class AddMentor extends Component {
           placeholder="Pairing Locations"
           value={this.state.pairing_location}
           onChange={event => this.updateProperty(event)}
-        /> */}
+        />
         <input
           type="submit"
           value="Create Mentor"
