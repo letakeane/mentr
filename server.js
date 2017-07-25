@@ -146,11 +146,11 @@ app.get('/api/v1/programs/:id', (request, response) => {
 app.post('/api/v1/mentors', (request, response) => {
 
   const mentor = request.body;
-
+  
   database('mentors').insert(mentor, 'id')
     .then(mentor => {
-      if (result) {
-        resonse.status(201).json({ id: mentor[0] });
+      if (mentor) {
+        response.status(201).json({ id: mentor[0] });
       } else {
         response.status(201).json({ error: 'You are missing a property'});
       }
@@ -166,8 +166,8 @@ app.post('/api/v1/students', (request, response) => {
 
   database('students').insert(student, 'id')
     .then(student => {
-      if (result) {
-        resonse.status(201).json({ id: student[0] });
+      if (student) {
+        response.status(201).json({ id: student[0] });
       } else {
         response.status(201).json({ error: 'You are missing a property'});
       }

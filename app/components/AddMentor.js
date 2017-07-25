@@ -31,6 +31,7 @@ export default class AddMentor extends Component {
         [name]: value
       })
     })
+    console.log(this.state);
   }
 
   addMentor(event) {
@@ -40,7 +41,7 @@ export default class AddMentor extends Component {
 
     fetch('/api/v1/mentors', {
       method: 'POST',
-      body: JSON.stringify({ mentor }),
+      body: JSON.stringify(mentor),
       headers: {
         'CONTENT-TYPE': 'application/json'
       }
