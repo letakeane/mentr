@@ -47,6 +47,192 @@ app.get('/authenticate', (request, response) => {
   response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`)
 })
 
+app.get('/api/v1/mentors', (request, response) => {
+  database('mentors').select()
+    .then(mentors => {
+      if (mentors) {
+        response.status(200).json(mentors)
+      } else {
+        return response.status(404).json({
+          error: 'There were no mentors found!'
+        })
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    });
+});
+
+app.get('/api/v1/students', (request, response) => {
+  database('students').select()
+    .then(students => {
+      if (students) {
+        response.status(200).json(students)
+      } else {
+        return response.status(404).json({
+          error: 'There were no students found!'
+        })
+      };
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    });
+});
+
+app.get('/api/v1/programs', (request, response) => {
+  database('programs').select()
+    .then((programs) => {
+      if (programs.length) {
+        response.status(200).json(programs)
+      } else {
+        return response.status(404).json({
+          error: 'There were no programs found!'
+        })
+      };
+    })
+    .catch((error) => {
+      response.status(500).json({ error })
+    });
+});
+
+app.get('/api/v1/mentors/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('mentors').where('id', id).select()
+    .then(mentor => {
+      if (mentor) {
+        response.status(200).json(mentor)
+      } else {
+        return response.status(404).json({
+          error: 'We could not find that mentor!'
+        })
+      };
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    });
+});
+
+app.get('/api/v1/students/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('students').where('id', id).select()
+    .then(student => {
+      if (student) {
+        response.status(200).json(student)
+      } else {
+        return response.status(404).json({
+          error: 'We could not find that student!'
+        })
+      };
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    });
+});
+
+app.get('/api/v1/programs/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('programs').where('id', id).select()
+    .then(program => {
+      if (program) {
+        response.status(200).json(program)
+      } else {
+        return response.status(404).json({
+          error: 'We could not find that program!'
+        })
+      };
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    });
+});
+
+app.post('/api/v1/mentors', (request, response) => {
+
+  const mentor = request.body;
+
+  database('mentors').insert(mentor, 'id')
+    .then(mentor => {
+      if (mentor) {
+        response.status(201).json({ id: mentor[0] });
+      } else {
+        response.status(201).json({ error: 'You are missing a property'});
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
+app.post('/api/v1/students', (request, response) => {
+
+  const student = request.body;
+
+  database('students').insert(student, 'id')
+    .then(student => {
+      if (student) {
+        response.status(201).json({ id: student[0] });
+      } else {
+        response.status(201).json({ error: 'You are missing a property'});
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
+app.patch('/api/v1/mentors/:id', (request, response) => {
+  const { id } = request.params;
+  const update = request.body;
+
+  database('mentors').where('id', id).update(update)
+    .then(update => {
+      response.status(201).json({ update });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
+app.patch('/api/v1/students/:id', (request, response) => {
+  const { id } = request.params;
+  const update = request.body;
+
+  database('students').where('id', id).select().update(update, 'id')
+    .then(update => {
+      response.status(201).json({ update });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
+app.delete('/api/v1/mentors/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('mentors').where('id', id).del()
+    .then(qty => {
+      response.status(204).json({ qty });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
+app.delete('/api/v1/students/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('students').where('id', id).del()
+    .then(qty => {
+      response.status(204).json({ qty });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}`);
 });

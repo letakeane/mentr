@@ -12,7 +12,8 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'backend',
     stack: 'Ruby/Rails, Python/Django',
-    pairing_location: 'phone, screenhero'
+    pairing_location: 'screenhero',
+    id: 1
   },
   {
     preferred_name: 'Jane Doe',
@@ -27,7 +28,8 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'front end',
     stack: 'Node.js, React',
-    pairing_location: 'turing, screenhero'
+    pairing_location: 'turing, screenhero',
+    id: 2
   },
   {
     preferred_name: 'Hal Jordan',
@@ -42,7 +44,8 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'full stack',
     stack: 'Ruby/Rails, Python/Django, Node.js, React',
-    pairing_location: 'turing, screenhero'
+    pairing_location: 'turing, screenhero',
+    id: 3
   },
 ]
 

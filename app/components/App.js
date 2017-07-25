@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { CreateProfile } from './CreateProfile';
 import { Header } from './Header.js';
+import AddMentor from './AddMentor';
+
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
+      mentors: [],
+      students: [],
       logStatus: false,
       userProfile: {}
     }
     this.setAppState = this.setAppState.bind(this)
+    this.updateMentors = this.updateMentors.bind(this);
+    this.setLogStatus = this.setLogStatus.bind(this)
   }
 
   setAppState() {
@@ -27,17 +33,18 @@ export default class App extends Component {
     this.setAppState();
   }
 
+  updateMentors(mentors) {
+    this.setState({ mentors: [mentors]})
+    console.log(this.state);
+  }
+
   render() {
     return (
       <div className='App'>
         <Header logStatus={this.state.logStatus} setAppState={this.setAppState} />
         <CreateProfile />
+        <AddMentor updateMentors={this.updateMentors} />
       </div>
     )
   }
 }
-
-        // <p>
-        //   We are going to now talk to the GitHub API. Ready?
-        //   <a href='/authenticate'>CLICK ME!</a>
-        // </p>
