@@ -52,10 +52,11 @@ app.get('/api/v1/mentors', (request, response) => {
     .then(mentors => {
       if (mentors) {
         response.status(200).json(mentors)
+      } else {
+        return response.status(404).json({
+          error: 'There were no mentors found!'
+        })
       }
-      return response.status(404).json({
-        error: 'There were no mentors found!'
-      })
     })
     .catch(error => {
       response.status(500).json({ error })
@@ -67,10 +68,11 @@ app.get('/api/v1/students', (request, response) => {
     .then(students => {
       if (students) {
         response.status(200).json(students)
-      }
-      return response.status(404).json({
-        error: 'There were no students found!'
-      })
+      } else {
+        return response.status(404).json({
+          error: 'There were no students found!'
+        })
+      };
     })
     .catch(error => {
       response.status(500).json({ error })
@@ -114,7 +116,7 @@ app.get('/api/v1/mentors/:id', (request, response) => {
 app.get('/api/v1/students/:id', (request, response) => {
   const { id } = request.params;
 
-  database('students').select()
+  database('students').where('id', id).select()
     .then(student => {
       if (student) {
         response.status(200).json(student)
@@ -132,7 +134,7 @@ app.get('/api/v1/students/:id', (request, response) => {
 app.get('/api/v1/programs/:id', (request, response) => {
   const { id } = request.params;
 
-  database('programs').select()
+  database('programs').where('id', id).select()
     .then(program => {
       if (program) {
         response.status(200).json(program)
@@ -152,12 +154,10 @@ app.post('/api/v1/mentors', (request, response) => {
   const mentor = request.body;
 
   database('mentors').insert(mentor, 'id')
-    .then(mentor => {
+    .then(result => {
       if (result) {
-        resonse.status(201).json({ id: mentor[0] });
-      } else {
-        response.status(201).json({ error: 'You are missing a property'});
-      }
+        response.status(201).json({ id: result[0] });
+      } 
     })
     .catch(error => {
       response.status(500).json({ error });
@@ -169,11 +169,9 @@ app.post('/api/v1/students', (request, response) => {
   const student = request.body;
 
   database('students').insert(student, 'id')
-    .then(student => {
+    .then(result => {
       if (result) {
-        resonse.status(201).json({ id: student[0] });
-      } else {
-        response.status(201).json({ error: 'You are missing a property'});
+        response.status(201).json({ id: result[0] });
       }
     })
     .catch(error => {
@@ -187,7 +185,7 @@ app.patch('/api/v1/mentors/:id', (request, response) => {
 
   database('mentors').where('id', id).update(update)
     .then(update => {
-      response.status(200).json({ update });
+      response.status(201).json({ update });
     })
     .catch(error => {
       response.status(500).json({ error });
@@ -198,9 +196,9 @@ app.patch('/api/v1/students/:id', (request, response) => {
   const { id } = request.params;
   const update = request.body;
 
-  database('students').where('id', id).update(update)
+  database('students').where('id', id).select().update(update, 'id')
     .then(update => {
-      response.status(200).json({ update });
+      response.status(201).json({ update });
     })
     .catch(error => {
       response.status(500).json({ error });
