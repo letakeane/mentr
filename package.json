@@ -6,7 +6,7 @@
   "scripts": {
     "build-css": "node-sass --include-path scss main.scss main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha",
     "build": "webpack --config ./webpack.config.js",
     "start": "npm build && nodemon server.js"
   },
@@ -37,6 +37,7 @@
     "webpack-hot-middleware": "^2.18.2"
   },
   "dependencies": {
+    "auth0-lock": "^10.19.0",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
