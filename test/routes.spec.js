@@ -132,7 +132,6 @@ describe('top level befores', () => {
     });
 
     it('should edit a mentor', (done) => {
-      console.log(testMentorPatch, 'patch it')
       chai.request(server)
       .patch('/api/v1/mentors/1')
       .send(testMentorPatch)
@@ -210,7 +209,6 @@ describe('top level befores', () => {
     });
 
     it('should edit a student', (done) => {
-      console.log(testStudentPatch, 'patch it')
       chai.request(server)
       .patch('/api/v1/students/1')
       .send(testStudentPatch)
