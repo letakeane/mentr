@@ -11,7 +11,7 @@ const testMentorComplete = {
     position: 'senior dev',
     dev_type: 'full stack',
     stack: 'Ruby/Rails, Python/Django, React, D3, Angular',
-    pairing_location: 'phone, screenhero',
+    pairing_location: 'screenhero',
     id: 4
   };
 

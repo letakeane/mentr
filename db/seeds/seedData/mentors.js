@@ -12,7 +12,7 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'backend',
     stack: 'Ruby/Rails, Python/Django',
-    pairing_location: 'phone, screenhero',
+    pairing_location: 'screenhero',
     id: 1
   },
   {
