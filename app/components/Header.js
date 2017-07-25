@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { lock } from '../../lock.js';
 
-export const Header = ({ logStatus, setLogStatus }) => {
+export const Header = ({ logStatus, setAppState }) => {
+  const logOut = () => {
+    localStorage.clear();
+    setAppState();
+  }
+
+  const logIn = () => {
+    setAppState();
+  }
+
   const logInOut = () => {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      setLogStatus();
       return (
-        <button id='log-out'>LOG OUT</button>
+        <button id='log-out' onClick={() => logOut()}>LOG OUT</button>
       )
     } else {
       return (
@@ -15,6 +23,7 @@ export const Header = ({ logStatus, setLogStatus }) => {
           id='log-in'
           onClick={() => {
             lock.show();
+            logIn();
           }
         }>LOG IN</button>
       )
