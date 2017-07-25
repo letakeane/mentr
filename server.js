@@ -135,7 +135,7 @@ app.get('/api/v1/programs/:id', (request, response) => {
         response.status(200).json(program)
       }
       return response.status(404).json({
-        error: 'There were no program found!'
+        error: 'We could not find that program!'
       })
     })
     .catch(error => {
@@ -177,23 +177,6 @@ app.post('/api/v1/students', (request, response) => {
     });
 });
 
-app.post('/api/v1/programs', (request, response) => {
-
-  const program = request.body;
-
-  database('programs').insert(program, 'id')
-    .then(program => {
-      if (result) {
-        resonse.status(201).json({ id: program[0] });
-      } else {
-        response.status(201).json({ error: 'You are missing a property'});
-      }
-    })
-    .catch(error => {
-      response.status(500).json({ error });
-    });
-});
-
 app.patch('/api/v1/mentors/:id', (request, response) => {
   const { id } = request.params;
   const update = request.body;
@@ -220,19 +203,6 @@ app.patch('/api/v1/students/:id', (request, response) => {
     });
 });
 
-app.patch('/api/v1/programs/:id', (request, response) => {
-  const { id } = request.params;
-  const update = request.body;
-
-  database('programs').where('id', id).update(update)
-    .then(update => {
-      response.status(200).json({ update });
-    })
-    .catch(error => {
-      response.status(500).json({ error });
-    });
-});
-
 app.delete('/api/v1/mentors/:id', (request, response) => {
   const { id } = request.params;
 
@@ -249,18 +219,6 @@ app.delete('/api/v1/students/:id', (request, response) => {
   const { id } = request.params;
 
   database('students').where('id', id).del()
-    .then(qty => {
-      response.status(204).json({ qty });
-    })
-    .catch(error => {
-      response.status(500).json({ error });
-    });
-});
-
-app.delete('/api/v1/programs/:id', (request, response) => {
-  const { id } = request.params;
-
-  database('programs').where('id', id).del()
     .then(qty => {
       response.status(204).json({ qty });
     })
