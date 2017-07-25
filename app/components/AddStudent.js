@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 
-export default class AddMentor extends Component {
+export default class AddStudent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+
     this.state = {
-      mentor: {
-        location: '',
-        preferred_contact: '',
+      student: {
         preferred_name: '',
         slack: '',
         email: '',
-        phone: '',
-        accepting_new: '',
-        availability: '',
-        company: '',
-        position: '',
-        dev_type: '',
-        stack: '',
-        pairing_location: ''
-      },
+        stack_interests: '',
+      }
       errorStatus: ''
-    };
+    }
   }
 
   updateProperty(event) {
@@ -33,49 +25,41 @@ export default class AddMentor extends Component {
     })
   }
 
-  addMentor(event) {
+  addStudent(event) {
     event.preventDefault();
-    const { updateMentors } = this.props;
-    const mentor = this.state.mentor;
+    const { updateStudents } = this.props;
+    const student = this.state.student;
 
-    fetch('/api/v1/mentors', {
+    fetch('/api/v1/students', {
       method: 'POST',
-      body: JSON.stringify(mentor),
+      body: JSON.stringify(student),
       headers: {
         'CONTENT-TYPE': 'application/json'
       }
     })
     .then(response => response.json())
-    .then(mentors => {
+    .then(students => {
       this.setState({
-        mentor: {
-          location: '',
-          preferred_contact: '',
+        student: {
           preferred_name: '',
           slack: '',
           email: '',
-          phone: '',
-          accepting_new: '',
-          availability: '',
-          company: '',
-          position: '',
-          dev_type: '',
-          stack: '',
-          pairing_location: ''
+          stack_interests: '',
         }
-      }, updateMentors(mentors));
+      }, updateStudents(students));
     })
     .catch(error => {
       this.setState({
-        errorStatus: 'Error adding mentor'
+        errorStatus: 'Error adding student'
       })
     })
   }
 
+
   render() {
     return (
       <form
-        onSubmit={event => this.addMentor(event)}
+        onSubmit={event => this.addStudent(event)}
         >
         <input
           type="text"
@@ -175,4 +159,5 @@ export default class AddMentor extends Component {
       </form>
     )
   }
+
 }
