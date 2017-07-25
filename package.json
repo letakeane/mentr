@@ -37,6 +37,7 @@
     "webpack-hot-middleware": "^2.18.2"
   },
   "dependencies": {
+    "auth0-lock": "^10.19.0",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
