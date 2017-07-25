@@ -40,7 +40,7 @@ export default class AddMentor extends Component {
 
     fetch('/api/v1/mentors', {
       method: 'POST',
-      body: mentor,
+      body: JSON.stringify({ mentor }),
       headers: {
         'CONTENT-TYPE': 'application/json'
       }
