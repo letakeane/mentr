@@ -154,10 +154,12 @@ app.post('/api/v1/mentors', (request, response) => {
   const mentor = request.body;
 
   database('mentors').insert(mentor, 'id')
-    .then(result => {
-      if (result) {
-        response.status(201).json({ id: result[0] });
-      } 
+    .then(mentor => {
+      if (mentor) {
+        response.status(201).json({ id: mentor[0] });
+      } else {
+        response.status(201).json({ error: 'You are missing a property'});
+      }
     })
     .catch(error => {
       response.status(500).json({ error });
@@ -169,9 +171,11 @@ app.post('/api/v1/students', (request, response) => {
   const student = request.body;
 
   database('students').insert(student, 'id')
-    .then(result => {
-      if (result) {
-        response.status(201).json({ id: result[0] });
+    .then(student => {
+      if (student) {
+        response.status(201).json({ id: student[0] });
+      } else {
+        response.status(201).json({ error: 'You are missing a property'});
       }
     })
     .catch(error => {
