@@ -33,6 +33,7 @@ export const Header = ({ logStatus, setAppState }) => {
 
   return (
     <div className='app-header'>
+      <h1>mentr</h1>
       {logInOut()}
     </div>
   )

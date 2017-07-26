@@ -30,8 +30,10 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.0",
     "chai-http": "^3.0.0",
+    "css-loader": "^0.28.4",
     "mocha": "^3.4.2",
     "node-sass": "^4.5.3",
+    "style-loader": "^0.18.2",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.6.1",
     "webpack-hot-middleware": "^2.18.2"

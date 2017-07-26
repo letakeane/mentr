@@ -4,7 +4,6 @@ import { CreateProfile } from './CreateProfile';
 import { Header } from './Header.js';
 import AddMentor from './AddMentor';
 
-
 export default class App extends Component {
   constructor() {
     super();
@@ -16,7 +15,6 @@ export default class App extends Component {
     }
     this.setAppState = this.setAppState.bind(this)
     this.updateMentors = this.updateMentors.bind(this);
-    this.setLogStatus = this.setLogStatus.bind(this)
   }
 
   setAppState() {
