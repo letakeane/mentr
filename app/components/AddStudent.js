@@ -61,34 +61,46 @@ export default class AddStudent extends Component {
       <form
         onSubmit={event => this.addStudent(event)}
         >
-        <input
-          type="text"
-          name="preferred_name"
-          placeholder="Preferred Name"
-          value={this.state.preferred_name}
-          onChange={event => this.updateProperty(event)}
-        />
-        <input
-          type="text"
-          name="slack"
-          placeholder="Slack Handle"
-          value={this.state.slack}
-          onChange={event => this.updateProperty(event)}
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Email Address"
-          value={this.state.email}
-          onChange={event => this.updateProperty(event)}
-        />
-        <input
-          type="text"
-          name="stack_interests"
-          placeholder="Stack Interests"
-          value={this.state.stack_interests}
-          onChange={event => this.updateProperty(event)}
-        />
+        <label>
+          Preferred Name
+          <input
+            type="text"
+            name="preferred_name"
+            placeholder="Preferred Name"
+            value={this.state.preferred_name}
+            onChange={event => this.updateProperty(event)}
+          />
+        </label>
+        <label>
+          Slack Handle
+          <input
+            type="text"
+            name="slack"
+            placeholder="Slack Handle"
+            value={this.state.slack}
+            onChange={event => this.updateProperty(event)}
+          />
+        </label>
+        <label>
+          Email Address
+          <input
+            type="text"
+            name="email"
+            placeholder="Email Address"
+            value={this.state.email}
+            onChange={event => this.updateProperty(event)}
+          />
+        </label>
+        <label>
+          Stack Interests
+          <input
+            type="text"
+            name="stack_interests"
+            placeholder="Stack Interests"
+            value={this.state.stack_interests}
+            onChange={event => this.updateProperty(event)}
+          />
+        </label>
         <input
           type="submit"
           value="Create Student"
