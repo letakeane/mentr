@@ -4,7 +4,6 @@ import { Header } from './Header.js';
 import AddMentor from './AddMentor';
 import AddStudent from './AddStudent';
 
-
 export default class App extends Component {
   constructor() {
     super();
@@ -14,29 +13,22 @@ export default class App extends Component {
       logStatus: false,
       userProfile: {}
     }
-
+    this.setAppState = this.setAppState.bind(this)
     this.updateMentors = this.updateMentors.bind(this);
-    this.setLogStatus = this.setLogStatus.bind(this)
   }
 
-  setLogStatus() {
-    const token = localStorage.getItem('accessToken');
-    const setStatus = () => {
-      if (token) {
-        if (logStatus === false) {
-          this.setState({ logStatus: true });
-        }
-      } else {
-        this.setState({ logStatus: false })
-      }
+  setAppState() {
+    if (this.state.logStatus === false) {
+      this.setState({ logStatus: true });
+      this.setState({ userProfile: JSON.parse(localStorage.getItem('profile')) });
+    } else {
+      this.setState({ logStatus: false });
+      this.setState({ userProfile: {} });
     }
   }
 
-  setUserProfile() {
-    if (this.state.logStatus === true) {
-      profileData = JSON.parse(localStorage.getItem('profile'));
-      this.setState({ userProfile: profileData });
-    }
+  componentDidMount() {
+    this.setAppState();
   }
 
   updateMentors(mentors) {
@@ -44,11 +36,11 @@ export default class App extends Component {
     console.log(this.state);
   }
 
-
   render() {
     return (
       <div className='App'>
         <Header logStatus={this.state.logStatus} setLogStatus = {this.setLogStatus} />
+
         <AddMentor updateMentors={this.updateMentors} />
         <AddStudent updateStudents={this.updateStudents} />
       </div>
