@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import { CreateProfile } from './CreateProfile';
 import { Header } from './Header.js';
 import AddMentor from './AddMentor';
+import AddStudent from './AddStudent';
 
 export default class App extends Component {
   constructor() {
@@ -39,9 +39,10 @@ export default class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Header logStatus={this.state.logStatus} setAppState={this.setAppState} />
-        <CreateProfile />
+        <Header logStatus={this.state.logStatus} setLogStatus = {this.setLogStatus} />
+
         <AddMentor updateMentors={this.updateMentors} />
+        <AddStudent updateStudents={this.updateStudents} />
       </div>
     )
   }
