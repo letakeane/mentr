@@ -6,7 +6,8 @@ const options = {
   theme: {
     logo: 'http://i.imgur.com/AGi44vF.png',
     primaryColor: '#021D36'
-  }
+  },
+  allowedConnections: ['github']
 };
 
 export const lock = new Auth0Lock(clientId, domain, options);
