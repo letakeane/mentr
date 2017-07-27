@@ -8,6 +8,9 @@ const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 const path = require('path');
 const config = require('dotenv').config().parsed;
 const clientId = config.CLIENT_ID;
+const request = require('request');
+// console.log(request, 'request')
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,6 +30,48 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
   // response.sendFile('./styles/index.scss')
   // response.sendFile('./scripts/index.js')
+})
+app.get('/callback', (request, response) => {
+  response.sendFile(path.join(__dirname + '/app/index.html'))
+  // response.sendFile('./styles/index.scss')
+  // response.sendFile('./scripts/index.js')
+})
+app.get('/dummy', (request, response) => {
+  response.sendFile(path.join(__dirname + '/app/index.html'))
+  // response.sendFile('./styles/index.scss')
+  // response.sendFile('./scripts/index.js')
+})
+
+app.post('/gh_auth_code/:code', (req, response) => {
+  let { code } = req.params;
+
+  let url = `https://github.com/login/oauth/access_token?client_id=5a67289f9670bc02530b&client_secret=b5e285e8796c7a511070352d888dfe8a4d8316f3&code=${code}`
+  request({uri: url}, function (error, res, body) {
+    if (!error && res.statusCode == 200) {
+      response.status(200).json(body)
+    }
+    else {
+      response.status(404).json(error)
+    }
+  });
+});
+
+app.get('/gh_auth_token/:token', (req, response) => {
+  let { token } = req.params;
+
+  let url = `https://api.github.com/user?access_token=${token}`
+  console.log(url, 'url')
+  request({uri: url}, function (error, res, body) {
+    if (!error && res.statusCode == 200) {
+      console.log(body, "body maybe")
+      response.status(200).json(body)
+    }
+    else {
+      console.log(body, 'error body?')
+      response.status(404).json(error)
+    }
+  });
+  // response.status(200).json('dog')
 })
 
 if(process.env.NODE_ENV !== 'production') {

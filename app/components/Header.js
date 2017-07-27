@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { lock } from '../../lock.js';
-
+// import { lock } from '../../lock.js';
 export const Header = ({ logStatus, setLogStatus }) => {
   const logInOut = () => {
     const token = localStorage.getItem('accessToken');
@@ -11,12 +10,9 @@ export const Header = ({ logStatus, setLogStatus }) => {
       )
     } else {
       return (
-        <button
-          id='log-in'
-          onClick={() => {
-            lock.show();
-          }
-        }>LOG IN</button>
+        <div>
+        <a id="addToSlackBtn" href="http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback">login</a>
+        </div>
       )
     }
     return;
