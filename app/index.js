@@ -5,6 +5,8 @@ import Callback from './components/Callback';
 
 import createHistory from 'history/createBrowserHistory';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
+require('./styles/index.css');
+var exportedStyles = require('!!css-loader!./styles/index.css');
 
 let history = createHistory();
 

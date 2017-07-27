@@ -45,11 +45,10 @@ app.post('/gh_auth_code/:code', (req, response) => {
   request({uri: url}, function (error, res, body) {
     if (!error && res.statusCode == 200) {
       response.status(200).json(body)
+    } else {
+      response.status(500).json({ error })
     }
   })
-  .catch(error => {
-      response.status(500).json({ error })
-    });
 });
 
 app.get('/gh_auth_token/:token', (req, response) => {
@@ -59,11 +58,10 @@ app.get('/gh_auth_token/:token', (req, response) => {
   request({uri: url, headers: {'User-Agent': 'Mentr'}}, function (error, res, body) {
     if (!error && res.statusCode == 200) {
       response.status(200).json(body)
-    } 
-  })
-  .catch(error => {
+    } else {
       response.status(500).json({ error })
-    });
+    }
+  })
 });
 
 if(process.env.NODE_ENV !== 'production') {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 export const Callback = props => {
-
   let login = (code) => {
+    console.log(code , '****code')
     if(!code) {
       return
     }
@@ -14,11 +14,13 @@ export const Callback = props => {
     })
     .then(data => {
       let wholeString = data.split("=")[1];
+      console.log(wholeString, 'wholestring')
       fetchUser(wholeString.split('&')[0])
     })
   };
 
   let fetchUser = (token) => {
+    console.log(token, ' token')
     
     fetch(`/gh_auth_token/${token}`, {
       method: 'GET'

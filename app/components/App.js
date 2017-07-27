@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { CreateProfile } from './CreateProfile';
+// import { CreateProfile } from './CreateProfile';
 import { Header } from './Header.js';
 import { Callback } from './Callback.js';
 import { Dummy } from './Dummy.js';
 import AddMentor from './AddMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
-
+import AddStudent from './AddStudent';
 
 export default class App extends Component {
   constructor() {
@@ -16,36 +16,28 @@ export default class App extends Component {
       logStatus: false,
       userProfile: {}
     }
-
+    this.setAppState = this.setAppState.bind(this)
     this.updateMentors = this.updateMentors.bind(this);
-    this.setLogStatus = this.setLogStatus.bind(this)
   }
 
-  setLogStatus() {
-    const token = localStorage.getItem('accessToken');
-    const setStatus = () => {
-      if (token) {
-        if (logStatus === false) {
-          this.setState({ logStatus: true });
-        }
-      } else {
-        this.setState({ logStatus: false })
-      }
+  setAppState() {
+    if (this.state.logStatus === false) {
+      this.setState({ logStatus: true });
+      this.setState({ userProfile: JSON.parse(localStorage.getItem('profile')) });
+    } else {
+      this.setState({ logStatus: false });
+      this.setState({ userProfile: {} });
     }
   }
 
-  setUserProfile() {
-    if (this.state.logStatus === true) {
-      profileData = JSON.parse(localStorage.getItem('profile'));
-      this.setState({ userProfile: profileData });
-    }
+  componentDidMount() {
+    this.setAppState();
   }
 
   updateMentors(mentors) {
     this.setState({ mentors: [mentors]})
     console.log(this.state);
   }
-
 
   render() {
     const codeParam = this.props.location.search;
@@ -58,10 +50,12 @@ export default class App extends Component {
 
           <Route path='/dummy' component={Dummy} />
         </Switch>
-        <CreateProfile />
+
         <AddMentor updateMentors={this.updateMentors} />
+        <AddStudent updateStudents={this.updateStudents} />
       </div>
     )
   }
 }
 
+       // <CreateProfile />
