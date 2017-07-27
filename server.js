@@ -9,8 +9,6 @@ const path = require('path');
 const config = require('dotenv').config().parsed;
 const clientId = config.CLIENT_ID;
 const request = require('request');
-// console.log(request, 'request')
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,17 +28,15 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
   // response.sendFile('./styles/index.scss')
   // response.sendFile('./scripts/index.js')
-})
+});
 app.get('/callback', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
-  // response.sendFile('./styles/index.scss')
-  // response.sendFile('./scripts/index.js')
-})
+});
+
+
 app.get('/dummy', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
-  // response.sendFile('./styles/index.scss')
-  // response.sendFile('./scripts/index.js')
-})
+});
 
 app.post('/gh_auth_code/:code', (req, response) => {
   let { code } = req.params;
@@ -50,29 +46,25 @@ app.post('/gh_auth_code/:code', (req, response) => {
     if (!error && res.statusCode == 200) {
       response.status(200).json(body)
     }
-    else {
-      response.status(404).json(error)
-    }
-  });
+  })
+  .catch(error => {
+      response.status(500).json({ error })
+    });
 });
 
 app.get('/gh_auth_token/:token', (req, response) => {
   let { token } = req.params;
 
   let url = `https://api.github.com/user?access_token=${token}`
-  console.log(url, 'url')
-  request({uri: url}, function (error, res, body) {
+  request({uri: url, headers: {'User-Agent': 'Mentr'}}, function (error, res, body) {
     if (!error && res.statusCode == 200) {
-      console.log(body, "body maybe")
       response.status(200).json(body)
-    }
-    else {
-      console.log(body, 'error body?')
-      response.status(404).json(error)
-    }
-  });
-  // response.status(200).json('dog')
-})
+    } 
+  })
+  .catch(error => {
+      response.status(500).json({ error })
+    });
+});
 
 if(process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
@@ -89,8 +81,8 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/authenticate', (request, response) => {
-  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`)
-})
+  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`);
+});
 
 app.get('/api/v1/mentors', (request, response) => {
   database('mentors').select()
