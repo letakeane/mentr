@@ -14,19 +14,28 @@ export default class App extends Component {
       mentors: [],
       students: [],
       logStatus: false,
-      userProfile: {}
+      userProfile: {},
+      githubAuthCode: undefined
     }
     this.setAppState = this.setAppState.bind(this)
     this.updateMentors = this.updateMentors.bind(this);
   }
 
   setAppState() {
+    const codeParam = this.props.location.search;
+    const githubAuthCode = codeParam.split("=")[1];
     if (this.state.logStatus === false) {
-      this.setState({ logStatus: true });
-      this.setState({ userProfile: JSON.parse(localStorage.getItem('profile')) });
+      this.setState({ 
+        logStatus: true,
+        userProfile: JSON.parse(localStorage.getItem('profile')),
+        githubAuthCode
+       });
     } else {
-      this.setState({ logStatus: false });
-      this.setState({ userProfile: {} });
+      this.setState({ 
+        logStatus: false ,
+        userProfile: {},
+        githubAuthCode: undefined
+      });
     }
   }
 
@@ -42,11 +51,12 @@ export default class App extends Component {
   render() {
     const codeParam = this.props.location.search;
     const githubAuthCode = codeParam.split("=")[1];
+    console.log(githubAuthCode, 'gh auth code')
     return (
       <div className='App'>
         <Header logStatus={this.state.logStatus} setLogStatus = {this.setLogStatus} />
         <Switch>
-          <Route path="/callback" render={(props) => <Callback code={githubAuthCode} /> }/>
+          <Route path="/callback" render={(props) => <Callback code={this.state.githubAuthCode} /> }/>
 
           <Route path='/dummy' component={Dummy} />
         </Switch>
