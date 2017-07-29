@@ -47,23 +47,7 @@ export default class AddMentor extends Component {
     })
     .then(response => response.json())
     .then(mentors => {
-      this.setState({
-        mentor: {
-          location: '',
-          preferred_contact: '',
-          preferred_name: '',
-          slack: '',
-          email: '',
-          phone: '',
-          accepting_new: '',
-          availability: '',
-          company: '',
-          position: '',
-          dev_type: '',
-          stack: '',
-          pairing_location: ''
-        }
-      }, updateMentors(mentors));
+      props.history.replace('/mentor-profile')
     })
     .catch(error => {
       this.setState({
