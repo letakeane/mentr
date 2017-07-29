@@ -59,6 +59,7 @@ export default class AddStudent extends Component {
   render() {
     return (
       <div>
+        <h2>Create a Student</h2>
         <form
           onSubmit={event => this.addStudent(event)}
           >
