@@ -76,6 +76,7 @@ export default class AddStudent extends Component {
           <label>
             Slack Handle
             <input
+              id="profile-slack"
               type="text"
               name="slack"
               placeholder="Slack Handle"
@@ -86,9 +87,10 @@ export default class AddStudent extends Component {
           <label>
             Email Address
             <input
-              type="text"
+              id="profile-email"
+              type="email"
               name="email"
-              placeholder="Email Address"
+              placeholder="email@youremail.com"
               value={this.state.email}
               onChange={event => this.updateProperty(event)}
             />
