@@ -75,7 +75,7 @@ export default class AddMentor extends Component {
   render() {
     return (
       <div>
-        <h2>Create profile</h2>
+        <h2>Create Mentor Profile</h2>
         <form
           id="create-profile-form"
           onSubmit={event => this.addMentor(event)}
@@ -104,8 +104,8 @@ export default class AddMentor extends Component {
               <label htmlFor='profile-prefer-slack'>Slack</label>
 
               <input
-                type='radio'
                 id='profile-prefer-email'
+                type='radio'
                 name='preferred_contact'
                 value='email'
                 onChange={event => this.updateProperty(event)}
@@ -113,8 +113,8 @@ export default class AddMentor extends Component {
               <label htmlFor='profile-prefer-email'>Email</label>
 
               <input
-                type='radio'
                 id='profile-prefer-phone'
+                type='radio'
                 name='preferred_contact'
                 value='phone'
                 onChange={event => this.updateProperty(event)}
