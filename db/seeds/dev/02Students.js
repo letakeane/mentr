@@ -1,8 +1,9 @@
 const students = require('../seedData/students.js');
 
 const createStudent = (knex, student) => {
-  const { preferred_name, slack, email, stack_interests, program_id } = student;
+  const { gh_id, preferred_name, slack, email, stack_interests, program_id } = student;
   return knex('students').insert({
+    gh_id,
     preferred_name,
     slack,
     email,

@@ -2,8 +2,10 @@ exports.up = function (knex, Promise) {
   return Promise.all([
     knex.schema.createTable('mentors', (table) => {
       table.increments('id').primary();
+      table.integer('gh_id');
       table.string('location');
       table.string('preferred_contact');
+      table.string('bio');
       table.string('preferred_name');
       table.string('slack');
       table.string('email');
