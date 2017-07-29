@@ -58,7 +58,9 @@ export default class AddStudent extends Component {
 
   render() {
     return (
+      <h2>Create Student Profile</h2>
       <form
+        id="create-profile-form"
         onSubmit={event => this.addStudent(event)}
         >
         <label>
