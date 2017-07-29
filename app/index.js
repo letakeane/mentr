@@ -10,10 +10,6 @@ var exportedStyles = require('!!css-loader!./styles/index.css');
 
 let history = createHistory();
 
-// render (
-//     <App/>, document.getElementById('main')
-// )
-
 render(<BrowserRouter history={history} >
         <div>
             <Route to='/' component={App}/>

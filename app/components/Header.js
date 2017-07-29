@@ -1,38 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export const Header = ({ logStatus, setAppState }) => {
-  const logOut = () => {
-    localStorage.clear();
-    setAppState();
-  }
-
-  const logIn = () => {
-    setAppState();
-  }
+export const Header = () => {
 
   const logInOut = () => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      return (
-        <button id='log-out' onClick={() => logOut()}>LOG OUT</button>
-      )
-    } else {
-      return (
+    return (
+      <div>
         <div>
-          <div>
-            <a id="addToSlackBtn" href="http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback">login for Auth0</a>
-          </div>
-          <button
-            id='log-in'
-            onClick={() => {
-              lock.show();
-              logIn();
-            }
-          }>LOG IN</button>
+          <a id="log-in" href="http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback">
+          LOG IN
+          </a>
         </div>
-      )
-    }
-    return;
+        
+      </div>
+    )
   }
 
   return (

@@ -13,27 +13,21 @@ export default class App extends Component {
     this.state = {
       mentors: [],
       students: [],
-      logStatus: false,
-      userProfile: {},
-      githubAuthCode: undefined
+      githubAuthCode: undefined,
+      user: ''
     }
-    this.setAppState = this.setAppState.bind(this)
     this.updateMentors = this.updateMentors.bind(this);
   }
 
   setAppState() {
     const codeParam = this.props.location.search;
     const githubAuthCode = codeParam.split("=")[1];
-    if (this.state.logStatus === false) {
+    if (!this.state.githubAuthCode) {
       this.setState({ 
-        logStatus: true,
-        userProfile: JSON.parse(localStorage.getItem('profile')),
         githubAuthCode
        });
     } else {
       this.setState({ 
-        logStatus: false ,
-        userProfile: {},
         githubAuthCode: undefined
       });
     }
@@ -49,9 +43,6 @@ export default class App extends Component {
   }
 
   render() {
-    const codeParam = this.props.location.search;
-    const githubAuthCode = codeParam.split("=")[1];
-    console.log(githubAuthCode, 'gh auth code')
     return (
       <div className='App'>
         <Header logStatus={this.state.logStatus} setLogStatus = {this.setLogStatus} />
@@ -68,4 +59,9 @@ export default class App extends Component {
   }
 }
 
-       // <CreateProfile />
+
+
+    //select from students where ghid = response id
+       //if id then take them to their home page
+       // if no id then select from mentors where ghid = response id
+       // if no id then direct them to sign up
