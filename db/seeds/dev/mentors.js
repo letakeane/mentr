@@ -1,20 +1,21 @@
 const mentors = require('../seedData/mentors.js');
 
 const createMentor = (knex, mentor) => {
-  const { gh_id, preferred_name, slack, email, location, phone, accepting_new, availability, company, position, dev_type, stack, pairing_location } = mentor;
+  const { gh_id, preferred_name, slack, email, location, phone, accepting_new, availability, company, position, dev_type, stack, pairing_location, avatar_url } = mentor;
   return knex('mentors').insert({
     gh_id,
-    preferred_name, 
-    slack, 
-    email, 
-    location, 
-    phone, 
-    accepting_new, 
-    availability, 
-    company, 
-    position, 
-    dev_type, 
-    stack, 
+    preferred_name,
+    slack,
+    email,
+    location,
+    avatar_url,
+    phone,
+    accepting_new,
+    availability,
+    company,
+    position,
+    dev_type,
+    stack,
     pairing_location
   }, 'id');
 };

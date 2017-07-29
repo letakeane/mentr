@@ -208,8 +208,10 @@ app.post('/api/v1/mentors', (request, response) => {
 });
 
 app.post('/api/v1/students', (request, response) => {
-
   const student = request.body;
+  student.program_id = parseInt(student.program_id);
+
+console.log('POSTING THIS STUDENT: ', student);
 
   database('students').insert(student, 'id')
     .then(student => {

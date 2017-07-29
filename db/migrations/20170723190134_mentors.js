@@ -7,6 +7,7 @@ exports.up = function (knex, Promise) {
       table.string('preferred_contact');
       table.string('bio');
       table.string('preferred_name');
+      table.string('avatar_url');
       table.string('slack');
       table.string('email');
       table.string('phone');
