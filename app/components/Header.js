@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { lock } from '../../lock.js';
 
 export const Header = ({ logStatus, setAppState }) => {
   const logOut = () => {
@@ -19,13 +18,18 @@ export const Header = ({ logStatus, setAppState }) => {
       )
     } else {
       return (
-        <button
-          id='log-in'
-          onClick={() => {
-            lock.show();
-            logIn();
-          }
-        }>LOG IN</button>
+        <div>
+          <div>
+            <a id="addToSlackBtn" href="http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback">login for Auth0</a>
+          </div>
+          <button
+            id='log-in'
+            onClick={() => {
+              lock.show();
+              logIn();
+            }
+          }>LOG IN</button>
+        </div>
       )
     }
     return;

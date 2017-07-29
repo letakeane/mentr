@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+// import { CreateProfile } from './CreateProfile';
 import { Header } from './Header.js';
+import { Callback } from './Callback.js';
+import { Dummy } from './Dummy.js';
 import AddMentor from './AddMentor';
+import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
 import AddStudent from './AddStudent';
 
 export default class App extends Component {
@@ -37,9 +40,16 @@ export default class App extends Component {
   }
 
   render() {
+    const codeParam = this.props.location.search;
+    const githubAuthCode = codeParam.split("=")[1];
     return (
       <div className='App'>
         <Header logStatus={this.state.logStatus} setLogStatus = {this.setLogStatus} />
+        <Switch>
+          <Route path="/callback" render={(props) => <Callback code={githubAuthCode} /> }/>
+
+          <Route path='/dummy' component={Dummy} />
+        </Switch>
 
         <AddMentor updateMentors={this.updateMentors} />
         <AddStudent updateStudents={this.updateStudents} />
@@ -47,3 +57,5 @@ export default class App extends Component {
     )
   }
 }
+
+       // <CreateProfile />

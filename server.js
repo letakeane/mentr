@@ -8,6 +8,7 @@ const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 const path = require('path');
 const config = require('dotenv').config().parsed;
 const clientId = config.CLIENT_ID;
+const request = require('request');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,7 +28,41 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
   // response.sendFile('./styles/index.scss')
   // response.sendFile('./scripts/index.js')
-})
+});
+app.get('/callback', (request, response) => {
+  response.sendFile(path.join(__dirname + '/app/index.html'))
+});
+
+
+app.get('/dummy', (request, response) => {
+  response.sendFile(path.join(__dirname + '/app/index.html'))
+});
+
+app.post('/gh_auth_code/:code', (req, response) => {
+  let { code } = req.params;
+
+  let url = `https://github.com/login/oauth/access_token?client_id=5a67289f9670bc02530b&client_secret=b5e285e8796c7a511070352d888dfe8a4d8316f3&code=${code}`
+  request({uri: url}, function (error, res, body) {
+    if (!error && res.statusCode == 200) {
+      response.status(200).json(body)
+    } else {
+      response.status(500).json({ error })
+    }
+  })
+});
+
+app.get('/gh_auth_token/:token', (req, response) => {
+  let { token } = req.params;
+
+  let url = `https://api.github.com/user?access_token=${token}`
+  request({uri: url, headers: {'User-Agent': 'Mentr'}}, function (error, res, body) {
+    if (!error && res.statusCode == 200) {
+      response.status(200).json(body)
+    } else {
+      response.status(500).json({ error })
+    }
+  })
+});
 
 if(process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
@@ -44,8 +79,8 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/authenticate', (request, response) => {
-  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`)
-})
+  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`);
+});
 
 app.get('/api/v1/mentors', (request, response) => {
   database('mentors').select()
