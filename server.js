@@ -29,12 +29,17 @@ app.get('/', (request, response) => {
   // response.sendFile('./styles/index.scss')
   // response.sendFile('./scripts/index.js')
 });
+
 app.get('/callback', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
 });
 
 
-app.get('/dummy', (request, response) => {
+app.get('/student-profile', (request, response) => {
+  response.sendFile(path.join(__dirname + '/app/index.html'))
+});
+
+app.get('/mentor-profile', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
 });
 
@@ -130,10 +135,10 @@ app.get('/api/v1/programs', (request, response) => {
     });
 });
 
-app.get('/api/v1/mentors/:id', (request, response) => {
-  const { id } = request.params;
+app.get('/api/v1/mentors/:gh_id', (request, response) => {
+  const { gh_id } = request.params;
 
-  database('mentors').where('id', id).select()
+  database('mentors').where('gh_id', gh_id).select()
     .then(mentor => {
       if (mentor) {
         response.status(200).json(mentor)
@@ -148,11 +153,12 @@ app.get('/api/v1/mentors/:id', (request, response) => {
     });
 });
 
-app.get('/api/v1/students/:id', (request, response) => {
-  const { id } = request.params;
+app.get('/api/v1/students/:gh_id', (request, response) => {
+  let gh_id  = parseInt(request.params.gh_id);
 
-  database('students').where('id', id).select()
+  database('students').where('gh_id', gh_id).select()
     .then(student => {
+      console.log(student, 'student after then')
       if (student) {
         response.status(200).json(student)
       } else {
