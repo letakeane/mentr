@@ -24,12 +24,12 @@ export default class App extends Component {
   }
 
   clearState() {
+    this.props.history.replace('/');
     this.setState({
       mentors: [],
       githubAuthCode: undefined,
       user: undefined
     })
-    this.history.replace('/');
   }
 
   setAppState() {
