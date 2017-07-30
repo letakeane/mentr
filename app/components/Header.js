@@ -1,18 +1,23 @@
 import React from 'react';
 
-export const Header = () => {
+export const Header = ({ user, clearState }) => {
 
   const logInOut = () => {
-    return (
-      <div>
-        <div>
-          <a id="log-in" href="http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback">
-          LOG IN
-          </a>
-        </div>
-        
-      </div>
-    )
+    if (!user) {
+      return (
+        <a id="log-in" href="http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback">
+        LOG IN
+        </a>
+      )
+    } else {
+      return (
+        <a id="log-out" href='/' onClick={(e) => {
+          e.preventDefault();
+          clearState(); }}>
+        LOG OUT
+        </a>
+      )
+    }
   }
 
   return (

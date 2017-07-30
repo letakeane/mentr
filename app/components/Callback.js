@@ -44,7 +44,7 @@ export const Callback = props => {
   }
 
   let fetchUser = (token) => {
-    
+
     fetch(`/gh_auth_token/${token}`, {
       method: 'GET'
     })
@@ -73,6 +73,3 @@ export const Callback = props => {
     <div> the callback is here </div>
   )
 }
-
-
-  

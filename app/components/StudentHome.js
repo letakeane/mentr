@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const StudentHome = (props) => {
-
+  const { user } = props;
   return (
     <div>
-      this is the student profile
+      <img src={props.user.avatar_url} id='user-image' />
+      <Link to='/create-student'>EDIT PROFILE</Link>
+      <Link to='/find-mentors'>FIND MENTORS</Link>
     </div>
   )
 }
