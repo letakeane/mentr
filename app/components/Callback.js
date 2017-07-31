@@ -68,6 +68,3 @@ export const Callback = props => {
     <div> the callback is here </div>
   )
 }
-
-
-  

@@ -22,6 +22,16 @@ export default class App extends Component {
     this.updateMentors = this.updateMentors.bind(this);
     this.setUser = this.setUser.bind(this);
     this.getFilteredMentors = this.getFilteredMentors.bind(this);
+    this.clearState = this.clearState.bind(this);
+  }
+
+  clearState() {
+    this.props.history.replace('/');
+    this.setState({
+      matchingMentors: [],
+      githubAuthCode: undefined,
+      user: undefined
+    })
   }
 
   setAppState() {
@@ -79,7 +89,9 @@ export default class App extends Component {
 
     return (
       <div className='App'>
-        <Header />
+        <Header
+          user={user}
+          clearState={this.clearState} />
         <Switch>
           <Route path="/callback" render={(props) => <Callback
               setUser={this.setUser}
