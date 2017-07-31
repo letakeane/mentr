@@ -40,10 +40,10 @@ export default class EditMentor extends Component {
 
   addMentor(event) {
     event.preventDefault();
-    const mentor = this.state.mentor;
+    const { mentor } = this.state;
 
     if (this.state.PATCH) {
-      fetch('/api/v1/mentors', {
+      fetch(`/api/v1/mentors/${mentor.gh_id}`, {
         method: 'PATCH',
         body: JSON.stringify(mentor),
         headers: {
@@ -51,7 +51,7 @@ export default class EditMentor extends Component {
         }
       })
       .then(() => {
-        fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
+        fetch(`/api/v1/mentors/${mentor.gh_id}`)
         .then(response => response.json())
         .then(currentMentor => {
           console.log('Trying to set current mentor: ', currentMentor[0]);
