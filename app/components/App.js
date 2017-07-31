@@ -14,19 +14,21 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      mentors: [],
       githubAuthCode: undefined,
-      user: undefined
+      user: undefined,
+      matchingMentors: []
     }
+    this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
     this.setUser = this.setUser.bind(this);
+    this.getFilteredMentors = this.getFilteredMentors.bind(this);
     this.clearState = this.clearState.bind(this);
   }
 
   clearState() {
     this.props.history.replace('/');
     this.setState({
-      mentors: [],
+      matchingMentors: [],
       githubAuthCode: undefined,
       user: undefined
     })
@@ -46,8 +48,17 @@ export default class App extends Component {
     }
   }
 
+  getAllMentors() {
+    fetch('/api/v1/mentors')
+    .then(response => response.json())
+    .then(data => {
+      this.mentors = data;
+    });
+  }
+
   componentDidMount() {
     this.setAppState();
+    this.getAllMentors();
   }
 
   updateMentors(mentors) {
@@ -59,8 +70,21 @@ export default class App extends Component {
     this.setState({ user });
   }
 
+  getFilteredMentors(e, searchParams, setSelectedKeys, filterMentors) {
+    e.preventDefault();
+    // const { searchParams } = this.state;
+
+    let selectedKeys = setSelectedKeys(searchParams);
+  
+    const searchedMentors = filterMentors(selectedKeys, searchParams);
+  console.log(searchedMentors, 'searched mentors at the end')
+    this.setState({
+      matchingMentors: searchedMentors
+    });
+  }
+
   render() {
-    const { user, githubAuthCode } = this.state;
+    const { user, githubAuthCode, matchingMentors } = this.state;
     const { history } = this.props;
 
     return (
@@ -74,7 +98,11 @@ export default class App extends Component {
               user={user}
               history={history}
               code={githubAuthCode} /> }/>
-          <Route path='/student-profile' render={(props) => <StudentHome user={user} />}/>
+          <Route path='/student-profile' render={(props) => <StudentHome 
+            user={user} 
+            mentors={this.mentors} 
+            matchingMentors={matchingMentors}
+            getFilteredMentors={this.getFilteredMentors} />}/>
           <Route path='/mentor-profile' render={(props) => <MentorHome user={user} />}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
@@ -87,9 +115,3 @@ export default class App extends Component {
   }
 }
 
-
-
-    //select from students where ghid = response id
-       //if id then take them to their home page
-       // if no id then select from mentors where ghid = response id
-       // if no id then direct them to sign up
