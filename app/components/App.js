@@ -3,7 +3,7 @@ import { Header } from './Header.js';
 import { Callback } from './Callback.js';
 import { Dummy } from './Dummy.js';
 import { StudentHome } from './StudentHome.js';
-import MentorHome from './MentorHome.js';
+import { MentorHome } from './MentorHome.js';
 import { ChooseStatus } from './ChooseStatus.js';
 import EditMentor from './EditMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
@@ -16,12 +16,14 @@ export default class App extends Component {
       githubAuthCode: undefined,
       user: undefined,
       matchingMentors: [],
+      currentMentor: {}
     }
     this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
     this.setUser = this.setUser.bind(this);
     this.getFilteredMentors = this.getFilteredMentors.bind(this);
     this.clearState = this.clearState.bind(this);
+    this.setCurrentMentor = this.setCurrentMentor.bind(this);
   }
 
   clearState() {
@@ -45,6 +47,13 @@ export default class App extends Component {
         githubAuthCode: undefined
       });
     }
+  }
+
+  setCurrentMentor(currentMentor) {
+    this.setState({
+      currentMentor: currentMentor
+    })
+    this.props.history.replace('/mentor-profile')
   }
 
   getAllMentors() {
@@ -81,7 +90,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { user, githubAuthCode, matchingMentors } = this.state;
+    const { user, githubAuthCode, matchingMentors, currentMentor } = this.state;
     const { history } = this.props;
 
     return (
@@ -100,7 +109,7 @@ export default class App extends Component {
             mentors={this.mentors}
             matchingMentors={matchingMentors}
             getFilteredMentors={this.getFilteredMentors} />}/>
-          <Route path='/mentor-profile' render={(props) => <MentorHome user={user} history={history}/>}/>
+          <Route path='/mentor-profile' render={(props) => <MentorHome currentMentor={currentMentor}/>}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
           <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>

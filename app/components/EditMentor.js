@@ -48,9 +48,14 @@ export default class EditMentor extends Component {
         'CONTENT-TYPE': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(mentors => {
-      console.log('worked');
+    .then(() => {
+      fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
+      .then(response => response.json())
+      .then(currentMentor => {
+        console.log('Trying to set current mentor: ', currentMentor[0]);
+        this.props.setCurrentMentor(currentMentor[0]);
+      })
+      .catch(error => console.log(error))
     })
     .catch(error => {
       this.setState({
@@ -87,7 +92,6 @@ export default class EditMentor extends Component {
           id="create-profile-form"
           onSubmit={event => {
             this.addMentor(event);
-            this.props.history.replace('/mentor-profile')
           }}
           >
           <label>

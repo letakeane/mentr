@@ -27,10 +27,7 @@ export const Callback = props => {
         .then(resp => resp.json())
         .then(mentorData => {
           if (mentorData[0]) {
-            props.history.replace('/edit-mentor')
-            // props.history.replace('/mentor-profile');
-            //set state with data
-
+            props.history.replace('/mentor-profile');
           } else {
             props.history.replace('/choose-status');
           }

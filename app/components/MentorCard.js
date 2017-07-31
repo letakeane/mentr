@@ -68,7 +68,7 @@ export default class MentorCard extends Component  {
             <p>{pairing_location}</p>
           </h3>
           <h3>Contact:
-            <h4>Preferred Form of Contact: {preferred_contact}</h4>
+            <p>Preferred Form of Contact: {preferred_contact}</p>
             <p>Slack: {slack}</p>
             <p>Email: {email}</p>
             <p>Phone: {phone}</p>

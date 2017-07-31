@@ -158,7 +158,6 @@ app.get('/api/v1/students/:gh_id', (request, response) => {
 
   database('students').where('gh_id', gh_id).select()
     .then(student => {
-      console.log(student, 'student after then')
       if (student) {
         response.status(200).json(student)
       } else {
@@ -210,8 +209,6 @@ app.post('/api/v1/mentors', (request, response) => {
 app.post('/api/v1/students', (request, response) => {
   const student = request.body;
   student.program_id = parseInt(student.program_id);
-
-console.log('POSTING THIS STUDENT: ', student);
 
   database('students').insert(student, 'id')
     .then(student => {
