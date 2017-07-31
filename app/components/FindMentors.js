@@ -124,6 +124,7 @@ export class FindMentors extends Component {
               />
           </label>
           <input
+            className='buttons'
             type="submit"
             value="Search for Mentors"
           />

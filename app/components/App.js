@@ -72,12 +72,10 @@ export default class App extends Component {
 
   getFilteredMentors(e, searchParams, setSelectedKeys, filterMentors) {
     e.preventDefault();
-    // const { searchParams } = this.state;
 
     let selectedKeys = setSelectedKeys(searchParams);
 
     const searchedMentors = filterMentors(selectedKeys, searchParams);
-  console.log(searchedMentors, 'searched mentors at the end')
     this.setState({
       matchingMentors: searchedMentors
     });
