@@ -53,7 +53,6 @@ export default class AddStudent extends Component {
 
 
   render() {
-console.log('student props: ', this.props);
     return (
       <div>
         <h2>Create a Student</h2>

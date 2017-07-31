@@ -75,9 +75,3 @@ export default class App extends Component {
   }
 }
 
-
-
-    //select from students where ghid = response id
-       //if id then take them to their home page
-       // if no id then select from mentors where ghid = response id
-       // if no id then direct them to sign up
