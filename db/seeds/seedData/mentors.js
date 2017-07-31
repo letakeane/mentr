@@ -55,26 +55,26 @@ const mentors = [
     stack: 'Ruby/Rails, Python/Django, Node.js, React',
     pairing_location: 'turing, screenhero',
     id: 3
-  },
-  {
-    gh_id: 23202538,
-    preferred_name: 'Spencer Hilvitz',
-    preferred_contact: 'slack',
-    bio: 'ridiculous',
-    location: 'anywhere but the basement',
-    avatar_url: 'https://avatars.githubusercontent.com/u/23202538?',
-    slack: 'hilvitzs',
-    email: 'spencer.hilvitz@gmail.com',
-    phone: '718-555-5555',
-    accepting_new: 'y',
-    availability: 'weekdays after 5, weekends',
-    company: 'turing',
-    position: 'senior dev',
-    dev_type: 'full stack',
-    stack: 'Ruby/Rails, Python/Django, Node.js, React',
-    pairing_location: 'turing, screenhero',
-    id: 4
   }
+  // {
+  //   gh_id: 23202538,
+  //   preferred_name: 'Spencer Hilvitz',
+  //   preferred_contact: 'slack',
+  //   bio: 'ridiculous',
+  //   location: 'anywhere but the basement',
+  //   avatar_url: 'https://avatars.githubusercontent.com/u/23202538?',
+  //   slack: 'hilvitzs',
+  //   email: 'spencer.hilvitz@gmail.com',
+  //   phone: '718-555-5555',
+  //   accepting_new: 'y',
+  //   availability: 'weekdays after 5, weekends',
+  //   company: 'turing',
+  //   position: 'senior dev',
+  //   dev_type: 'full stack',
+  //   stack: 'Ruby/Rails, Python/Django, Node.js, React',
+  //   pairing_location: 'turing, screenhero',
+  //   id: 4
+  // }
 ]
 
 module.exports = mentors;

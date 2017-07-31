@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
+import MentorHome from './MentorHome';
 
 export default class EditMentor extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class EditMentor extends Component {
         preferred_name: '',
         slack: '',
         email: '',
+        bio: '',
         phone: '',
         accepting_new: '',
         availability: '',
@@ -18,7 +20,9 @@ export default class EditMentor extends Component {
         position: '',
         dev_type: '',
         stack: '',
-        pairing_location: ''
+        pairing_location: '',
+        gh_id: this.props.user.ghId,
+        avatar_url: this.props.user.avatar_url
       },
       errorStatus: ''
     };
@@ -28,14 +32,13 @@ export default class EditMentor extends Component {
     const { name, value } = event.target;
     this.setState({
       mentor: Object.assign(this.state.mentor, {
-        [name]: this.state.mentor[name] + ", " + value
+        [name]: value
       })
     })
   }
 
   addMentor(event) {
     event.preventDefault();
-    const { updateMentors } = this.props;
     const mentor = this.state.mentor;
 
     fetch('/api/v1/mentors', {
@@ -45,9 +48,14 @@ export default class EditMentor extends Component {
         'CONTENT-TYPE': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(mentors => {
-      props.history.replace('/mentor-profile')
+    .then(() => {
+      fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
+      .then(response => response.json())
+      .then(currentMentor => {
+        console.log('Trying to set current mentor: ', currentMentor[0]);
+        this.props.setCurrentMentor(currentMentor[0]);
+      })
+      .catch(error => console.log(error))
     })
     .catch(error => {
       this.setState({
@@ -66,8 +74,8 @@ export default class EditMentor extends Component {
         this.setState({
           mentor: Object.assign(this.state.mentor, mentor[0])
         })
-        console.log('did not work');
-        console.log(this.state);
+      } else {
+        return
       }
     })
   }
@@ -82,7 +90,9 @@ export default class EditMentor extends Component {
         <h2>Create Mentor Profile</h2>
         <form
           id="create-profile-form"
-          onSubmit={event => this.addMentor(event)}
+          onSubmit={event => {
+            this.addMentor(event);
+          }}
           >
           <label>
             Location
@@ -92,6 +102,18 @@ export default class EditMentor extends Component {
               name="location"
               placeholder="City, State"
               value={this.state.mentor.location}
+              onChange={event => this.updateProperty(event)}
+            />
+          </label>
+          <label>
+            Bio
+            <textarea
+              id="profile-bio"
+              form="create-profile-form"
+              type="textarea"
+              name="bio"
+              placeholder="Bio"
+              value={this.state.mentor.bio}
               onChange={event => this.updateProperty(event)}
             />
           </label>

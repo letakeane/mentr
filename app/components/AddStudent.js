@@ -42,7 +42,7 @@ export default class AddStudent extends Component {
     })
     .then(response => response.json())
     .then(students => {
-      props.history.replace('/student-profile');
+      this.props.history.replace('/student-profile');
     })
     .catch(error => {
       this.setState({

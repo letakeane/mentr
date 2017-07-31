@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-export class MentorCard extends Component  {
+export default class MentorCard extends Component  {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       showMore: false
@@ -17,7 +18,7 @@ export class MentorCard extends Component  {
   }
 
   render() {
-    const { preferred_name, bio, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack } = this.props.mentor;
+    const { preferred_name, bio, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
     let view = this.state.showMore ? 'Show Less' : 'Show More';
     if(!this.state.showMore) {
       return (
@@ -67,7 +68,7 @@ export class MentorCard extends Component  {
             <p>{pairing_location}</p>
           </h3>
           <h3>Contact:
-            <h4>Preferred Form of Contact: {preferred_contact}</h4>
+            <p>Preferred Form of Contact: {preferred_contact}</p>
             <p>Slack: {slack}</p>
             <p>Email: {email}</p>
             <p>Phone: {phone}</p>
