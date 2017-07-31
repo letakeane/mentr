@@ -15,9 +15,10 @@ export class FindMentors extends Component {
         devType: '',
         stack: '',
         pairing_location: '',
-      },
-      filteredMentors: []
+      }
     }
+    this.setSelectedKeys = this.setSelectedKeys.bind(this);
+    this.filterMentors = this.filterMentors.bind(this);
   }
 
   setSelectedKeys(searchParams) {
@@ -27,7 +28,7 @@ export class FindMentors extends Component {
   }
 
   filterMentors(selectedKeys, searchParams) {
-    const matchingMentors = [];
+    const targetMentors = [];
     this.allMentors.forEach( mentor => {
       let pushing = true;
       selectedKeys.forEach( key => {
@@ -35,24 +36,11 @@ export class FindMentors extends Component {
           pushing = false;
         }
         if(pushing) {
-          matchingMentors.push(mentor);
+          targetMentors.push(mentor);
         }
       });
     });
-    return matchingMentors;
-  }
-
-  getFilteredMentors(e) {
-    e.preventDefault();
-    const { searchParams } = this.state;
-
-    let selectedKeys = this.setSelectedKeys(searchParams);
-  
-    const searchedMentors = this.filterMentors(selectedKeys, searchParams);
-  
-    this.setState({
-      filteredMentors: searchedMentors
-    });
+    return targetMentors;
   }
 
   updateProperty(e) {
@@ -65,11 +53,13 @@ export class FindMentors extends Component {
   }
 
   render() {
+    const { getFilteredMentors } = this.props;
+    let { searchParams } = this.state;
     return(
       <div>
         <h2>Search for a Mentor</h2>
         <form 
-          onSubmit={e => this.getFilteredMentors(e)}>
+          onSubmit={e => getFilteredMentors(e, searchParams, this.setSelectedKeys, this.filterMentors )}>
           <label> Name 
             <input
               type='text'

@@ -15,11 +15,13 @@ export default class App extends Component {
     super();
     this.state = {
       githubAuthCode: undefined,
-      user: undefined
+      user: undefined,
+      matchingMentors: []
     }
     this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
     this.setUser = this.setUser.bind(this);
+    this.getFilteredMentors = this.getFilteredMentors.bind(this);
   }
 
   setAppState() {
@@ -58,8 +60,21 @@ export default class App extends Component {
     this.setState({ user });
   }
 
+  getFilteredMentors(e, searchParams, setSelectedKeys, filterMentors) {
+    e.preventDefault();
+    // const { searchParams } = this.state;
+
+    let selectedKeys = setSelectedKeys(searchParams);
+  
+    const searchedMentors = filterMentors(selectedKeys, searchParams);
+  console.log(searchedMentors, 'searched mentors at the end')
+    this.setState({
+      matchingMentors: searchedMentors
+    });
+  }
+
   render() {
-    const { user, githubAuthCode } = this.state;
+    const { user, githubAuthCode, matchingMentors } = this.state;
     const { history } = this.props;
 
     return (
@@ -71,7 +86,11 @@ export default class App extends Component {
               user={user}
               history={history}
               code={githubAuthCode} /> }/>
-          <Route path='/student-profile' render={(props) => <StudentHome user={user} mentors={this.mentors} />}/>
+          <Route path='/student-profile' render={(props) => <StudentHome 
+            user={user} 
+            mentors={this.mentors} 
+            matchingMentors={matchingMentors}
+            getFilteredMentors={this.getFilteredMentors} />}/>
           <Route path='/mentor-profile' render={(props) => <MentorHome user={user} />}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
