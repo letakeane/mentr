@@ -226,11 +226,11 @@ console.log('POSTING THIS STUDENT: ', student);
     });
 });
 
-app.patch('/api/v1/mentors/:id', (request, response) => {
-  const { id } = request.params;
+app.patch('/api/v1/mentors/:gh_id', (request, response) => {
+  const { gh_id } = request.params;
   const update = request.body;
 
-  database('mentors').where('id', id).update(update)
+  database('mentors').where('gh_id', gh_id).update(update)
     .then(update => {
       response.status(201).json({ update });
     })
