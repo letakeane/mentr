@@ -6,7 +6,7 @@ import { Dummy } from './Dummy.js';
 import { StudentHome } from './StudentHome.js';
 import { MentorHome } from './MentorHome.js';
 import { ChooseStatus } from './ChooseStatus.js';
-import AddMentor from './AddMentor';
+import EditMentor from './EditMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
 import AddStudent from './AddStudent';
 
@@ -75,7 +75,7 @@ export default class App extends Component {
     // const { searchParams } = this.state;
 
     let selectedKeys = setSelectedKeys(searchParams);
-  
+
     const searchedMentors = filterMentors(selectedKeys, searchParams);
   console.log(searchedMentors, 'searched mentors at the end')
     this.setState({
@@ -98,15 +98,15 @@ export default class App extends Component {
               user={user}
               history={history}
               code={githubAuthCode} /> }/>
-          <Route path='/student-profile' render={(props) => <StudentHome 
-            user={user} 
-            mentors={this.mentors} 
+          <Route path='/student-profile' render={(props) => <StudentHome
+            user={user}
+            mentors={this.mentors}
             matchingMentors={matchingMentors}
             getFilteredMentors={this.getFilteredMentors} />}/>
           <Route path='/mentor-profile' render={(props) => <MentorHome user={user} />}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
-          <Route path='/create-mentor' render={(props) => <AddMentor user={user} updateMentors={this.updateMentors} history={history} />}/>
+          <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} />}/>
 
         </Switch>
 
@@ -114,4 +114,3 @@ export default class App extends Component {
     )
   }
 }
-

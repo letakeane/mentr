@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 
-export default class AddMentor extends Component {
+export default class EditMentor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +56,26 @@ export default class AddMentor extends Component {
     })
   }
 
+  checkDatabase () {
+    const { ghId } = this.props.user;
+
+    fetch(`/api/v1/mentors/${ghId}`)
+    .then(response => response.json())
+    .then(mentor => {
+      if (mentor.length === 1) {
+        this.setState({
+          mentor: Object.assign(this.state.mentor, mentor[0])
+        })
+        console.log('did not work');
+        console.log(this.state);
+      }
+    })
+  }
+
+  componentWillMount() {
+    this.checkDatabase()
+  }
+
   render() {
     return (
       <div>
@@ -71,7 +91,7 @@ export default class AddMentor extends Component {
               type="text"
               name="location"
               placeholder="City, State"
-              value={this.state.location}
+              value={this.state.mentor.location}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -112,7 +132,7 @@ export default class AddMentor extends Component {
               type="text"
               name="preferred_name"
               placeholder="Preferred Name"
-              value={this.state.preferred_name}
+              value={this.state.mentor.preferred_name}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -123,7 +143,7 @@ export default class AddMentor extends Component {
               type="text"
               name="slack"
               placeholder="username"
-              value={this.state.slack}
+              value={this.state.mentor.slack}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -134,7 +154,7 @@ export default class AddMentor extends Component {
               type="email"
               name="email"
               placeholder="email@youremail.com"
-              value={this.state.email}
+              value={this.state.mentor.email}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -145,7 +165,7 @@ export default class AddMentor extends Component {
               pattern="[0-9\-\+\s\(\)]*$"
               name="phone"
               placeholder="555-123-4567"
-              value={this.state.phone}
+              value={this.state.mentor.phone}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -179,7 +199,7 @@ export default class AddMentor extends Component {
               type="textarea"
               name="availability"
               placeholder="Availability"
-              value={this.state.availability}
+              value={this.state.mentor.availability}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -190,7 +210,7 @@ export default class AddMentor extends Component {
               type="text"
               name="company"
               placeholder="Rad Tech Co."
-              value={this.state.company}
+              value={this.state.mentor.company}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -201,7 +221,7 @@ export default class AddMentor extends Component {
               type="text"
               name="position"
               placeholder="Senior Developer"
-              value={this.state.position}
+              value={this.state.mentor.position}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -211,7 +231,7 @@ export default class AddMentor extends Component {
               type="text"
               name="dev_type"
               placeholder="Type of Developer"
-              value={this.state.dev_type}
+              value={this.state.mentor.dev_type}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -221,7 +241,7 @@ export default class AddMentor extends Component {
               type="text"
               name="stack"
               placeholder="Stack Knowledge"
-              value={this.state.stack}
+              value={this.state.mentor.stack}
               onChange={event => this.updateProperty(event)}
             />
           </label>
