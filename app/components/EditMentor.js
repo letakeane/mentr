@@ -24,7 +24,8 @@ export default class EditMentor extends Component {
         gh_id: this.props.user.ghId,
         avatar_url: this.props.user.avatar_url
       },
-      errorStatus: ''
+      errorStatus: '',
+      PATCH: false
     };
   }
 
@@ -39,29 +40,53 @@ export default class EditMentor extends Component {
 
   addMentor(event) {
     event.preventDefault();
-    const mentor = this.state.mentor;
+    const { mentor } = this.state;
 
-    fetch('/api/v1/mentors', {
-      method: 'POST',
-      body: JSON.stringify(mentor),
-      headers: {
-        'CONTENT-TYPE': 'application/json'
-      }
-    })
-    .then(() => {
-      fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
-      .then(response => response.json())
-      .then(currentMentor => {
-        console.log('Trying to set current mentor: ', currentMentor[0]);
-        this.props.setCurrentMentor(currentMentor[0]);
+    if (this.state.PATCH) {
+      fetch(`/api/v1/mentors/${mentor.gh_id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(mentor),
+        headers: {
+          'CONTENT-TYPE': 'application/json'
+        }
       })
-      .catch(error => console.log(error))
-    })
-    .catch(error => {
-      this.setState({
-        errorStatus: 'Error adding mentor'
+      .then(() => {
+        fetch(`/api/v1/mentors/${mentor.gh_id}`)
+        .then(response => response.json())
+        .then(currentMentor => {
+          console.log('Trying to set current mentor: ', currentMentor[0]);
+          this.props.setCurrentMentor(currentMentor[0]);
+        })
+        .catch(error => console.log(error))
       })
-    })
+      .catch(error => {
+        this.setState({
+          errorStatus: 'Error adding mentor'
+        })
+      })
+    } else {
+      fetch('/api/v1/mentors', {
+        method: 'POST',
+        body: JSON.stringify(mentor),
+        headers: {
+          'CONTENT-TYPE': 'application/json'
+        }
+      })
+      .then(() => {
+        fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
+        .then(response => response.json())
+        .then(currentMentor => {
+          console.log('Trying to set current mentor: ', currentMentor[0]);
+          this.props.setCurrentMentor(currentMentor[0]);
+        })
+        .catch(error => console.log(error))
+      })
+      .catch(error => {
+        this.setState({
+          errorStatus: 'Error adding mentor'
+        })
+      })
+    }
   }
 
   checkDatabase () {
@@ -72,9 +97,11 @@ export default class EditMentor extends Component {
     .then(mentor => {
       if (mentor.length === 1) {
         this.setState({
-          mentor: Object.assign(this.state.mentor, mentor[0])
+          mentor: Object.assign(this.state.mentor, mentor[0]),
+          PATCH: true
         })
       } else {
+        this.setState({ PATCH: false })
         return
       }
     })

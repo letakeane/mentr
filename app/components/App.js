@@ -3,7 +3,7 @@ import { Header } from './Header.js';
 import { Callback } from './Callback.js';
 import { Dummy } from './Dummy.js';
 import { StudentHome } from './StudentHome.js';
-import { MentorHome } from './MentorHome.js';
+import MentorHome from './MentorHome.js';
 import { ChooseStatus } from './ChooseStatus.js';
 import EditMentor from './EditMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
@@ -109,7 +109,7 @@ export default class App extends Component {
             mentors={this.mentors}
             matchingMentors={matchingMentors}
             getFilteredMentors={this.getFilteredMentors} />}/>
-          <Route path='/mentor-profile' render={(props) => <MentorHome currentMentor={currentMentor}/>}/>
+          <Route path='/mentor-profile' render={(props) => <MentorHome user={user} currentMentor={currentMentor}/>}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
           <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>
