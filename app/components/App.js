@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-// import { CreateProfile } from './CreateProfile';
 import { Header } from './Header.js';
 import { Callback } from './Callback.js';
 import { Dummy } from './Dummy.js';
 import { StudentHome } from './StudentHome.js';
-import { MentorHome } from './MentorHome.js';
+import MentorHome from './MentorHome.js';
 import { ChooseStatus } from './ChooseStatus.js';
 import EditMentor from './EditMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
@@ -16,7 +15,7 @@ export default class App extends Component {
     this.state = {
       githubAuthCode: undefined,
       user: undefined,
-      matchingMentors: []
+      matchingMentors: [],
     }
     this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
@@ -101,10 +100,10 @@ export default class App extends Component {
             mentors={this.mentors}
             matchingMentors={matchingMentors}
             getFilteredMentors={this.getFilteredMentors} />}/>
-          <Route path='/mentor-profile' render={(props) => <MentorHome user={user} />}/>
+          <Route path='/mentor-profile' render={(props) => <MentorHome user={user} history={history}/>}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
-          <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} />}/>
+          <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>
 
         </Switch>
 
