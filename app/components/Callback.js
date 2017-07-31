@@ -27,7 +27,7 @@ export const Callback = props => {
         .then(resp => resp.json())
         .then(mentorData => {
           if (mentorData[0]) {
-
+            console.log('something');
             props.history.replace('/mentor-profile');
             //set state with data
 
@@ -40,7 +40,7 @@ export const Callback = props => {
   }
 
   const fetchUser = (token) => {
-    
+
     fetch(`/gh_auth_token/${token}`, {
       method: 'GET'
     })
