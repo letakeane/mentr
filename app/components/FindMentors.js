@@ -4,7 +4,7 @@ import { Route } from 'react-router';
 export class FindMentors extends Component {
   constructor(props) {
     super(props)
-    this.allMentors = [];
+    this.allMentors = props.mentors;
     this.state = {
       searchParams: {
         location: '',
@@ -18,14 +18,6 @@ export class FindMentors extends Component {
       },
       filteredMentors: []
     }
-  }
-
-  getAllMentors() {
-    fetch('/api/v1/mentors')
-    .then(response => response.json())
-    .then(data => {
-      this.allMentors = data;
-    });
   }
 
   setSelectedKeys(searchParams) {
@@ -61,10 +53,6 @@ export class FindMentors extends Component {
     this.setState({
       filteredMentors: searchedMentors
     });
-  }
-
-  componentDidMount() {
-    this.getAllMentors();
   }
 
   updateProperty(e) {

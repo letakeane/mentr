@@ -14,10 +14,10 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      mentors: [],
       githubAuthCode: undefined,
       user: undefined
     }
+    this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
     this.setUser = this.setUser.bind(this);
   }
@@ -36,8 +36,17 @@ export default class App extends Component {
     }
   }
 
+  getAllMentors() {
+    fetch('/api/v1/mentors')
+    .then(response => response.json())
+    .then(data => {
+      this.mentors = data;
+    });
+  }
+
   componentDidMount() {
     this.setAppState();
+    this.getAllMentors();
   }
 
   updateMentors(mentors) {
@@ -62,7 +71,7 @@ export default class App extends Component {
               user={user}
               history={history}
               code={githubAuthCode} /> }/>
-          <Route path='/student-profile' render={(props) => <StudentHome user={user} />}/>
+          <Route path='/student-profile' render={(props) => <StudentHome user={user} mentors={this.mentors} />}/>
           <Route path='/mentor-profile' render={(props) => <MentorHome user={user} />}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
           <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>

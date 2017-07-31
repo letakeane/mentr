@@ -7,7 +7,8 @@ export const StudentHome = (props) => {
   return (
     <div>
       <h2>Student Home</h2>
-      <FindMentors />
+      <FindMentors 
+        mentors={props.mentors} />
     </div>
   )
 }
