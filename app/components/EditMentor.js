@@ -330,6 +330,7 @@ export default class EditMentor extends Component {
                 type='radio'
                 name='accepting_new'
                 value='y'
+                checked={this.state.y}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-new-yes'>Yes</label>
@@ -339,6 +340,7 @@ export default class EditMentor extends Component {
                 type='radio'
                 name='accepting_new'
                 value='n'
+                checked={this.state.n}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-new-no'>No</label>
