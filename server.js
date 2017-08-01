@@ -26,8 +26,6 @@ app.locals.title = 'Mentr';
 
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
-  // response.sendFile('./styles/index.scss')
-  // response.sendFile('./scripts/index.js')
 });
 
 app.get('/callback', (request, response) => {
