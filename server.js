@@ -59,7 +59,7 @@ app.get('/mentor-profile', (request, response) => {
 app.post('/gh_auth_code/:code', (req, response) => {
   let { code } = req.params;
 
-  let url = `https://github.com/login/oauth/access_token?client_id=5a67289f9670bc02530b&client_secret=b5e285e8796c7a511070352d888dfe8a4d8316f3&redirect_uri=turing-mentr.herokuapp.com/callback&code=${code}`
+  let url = `https://github.com/login/oauth/access_token?client_id=5a67289f9670bc02530b&client_secret=b5e285e8796c7a511070352d888dfe8a4d8316f3&redirect_uri=https://turing-mentr.herokuapp.com/callback&code=${code}`
   request({uri: url}, function (error, res, body) {
     if (!error && res.statusCode == 200) {
       response.status(200).json(body)
