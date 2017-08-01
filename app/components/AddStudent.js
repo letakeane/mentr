@@ -15,7 +15,8 @@ export default class AddStudent extends Component {
         avatar_url: this.props.user.avatar_url,
         program_id: 1
       },
-      errorStatus: ''
+      errorStatus: '',
+      PATCH: false
     }
   }
 
@@ -52,6 +53,27 @@ export default class AddStudent extends Component {
       })
   }
 
+  checkDatabase() {
+    const { ghId } = this.props.user;
+
+    fetch(`/api/v1/students/${ghId}`)
+      .then(response => response.json())
+      .then(student => {
+        if (student.length === 1) {
+          this.setState({
+            student: Object.assign(this.state.student, student[0]),
+            PATCH: true
+          })
+        } else {
+          this.setState({ PATCH: false })
+          return
+        }
+      })
+  }
+
+  componentWillMount() {
+    this.checkDatabase()
+  }
 
   render() {
     return (

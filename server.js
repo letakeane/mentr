@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 app.set('port', process.env.PORT || 1701);
 
-if(process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -209,7 +209,7 @@ app.post('/api/v1/mentors', (request, response) => {
 
 app.post('/api/v1/students', (request, response) => {
   const student = request.body;
-  
+
   student.program_id = parseInt(student.program_id);
 
   database('students').insert(student, 'id')
@@ -238,11 +238,11 @@ app.patch('/api/v1/mentors/:gh_id', (request, response) => {
     });
 });
 
-app.patch('/api/v1/students/:id', (request, response) => {
-  const { id } = request.params;
+app.patch('/api/v1/students/:gh_id', (request, response) => {
+  const { gh_id } = request.params;
   const update = request.body;
 
-  database('students').where('id', id).select().update(update, 'id')
+  database('students').where('gh_id', gh_id).select().update(update, 'id')
     .then(update => {
       response.status(201).json({ update });
     })

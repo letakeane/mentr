@@ -31,7 +31,9 @@ export default class EditMentor extends Component {
       'off-campus': false,
       slack: false,
       email: false,
-      phone: false
+      phone: false,
+      y: false,
+      n: false
     };
   }
 
@@ -130,6 +132,7 @@ export default class EditMentor extends Component {
           })
           this.checkPreferredContact()
           this.checkCheckboxes();
+          this.checkAccepting()
         } else {
           this.setState({ PATCH: false })
           return
@@ -169,6 +172,20 @@ export default class EditMentor extends Component {
     if (this.state.mentor.pairing_location.includes('off-campus')) {
       this.setState({
         'off-campus': true
+      })
+    }
+  }
+
+  checkAccepting() {
+    if (this.state.mentor.accepting_new.includes('y')) {
+      this.setState({
+        y: true
+      })
+    }
+
+    if (this.state.mentor.accepting_new.includes('n')) {
+      this.setState({
+        n: true
       })
     }
   }
