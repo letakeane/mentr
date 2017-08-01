@@ -25,7 +25,10 @@ export default class EditMentor extends Component {
         avatar_url: this.props.user.avatar_url
       },
       errorStatus: '',
-      PATCH: false
+      PATCH: false,
+      // turing: '',
+      // off_campus: '',
+      // remote: ''
     };
   }
 
@@ -36,6 +39,20 @@ export default class EditMentor extends Component {
         [name]: value
       })
     })
+  }
+
+  updateCheckboxes (event) {
+    const { name, value } = event.target;
+
+    if(this.state.mentor.pairing_location.includes(`${value}`)) {
+      return
+    } else {
+      this.setState({
+        mentor: Object.assign(this.state.mentor, {
+          pairing_location: this.state.mentor[name] + ', ' + value
+        })
+      })
+    }
   }
 
   addMentor(event) {
@@ -88,7 +105,7 @@ export default class EditMentor extends Component {
     }
   }
 
-  checkDatabase () {
+  checkDatabase() {
     const { ghId } = this.props.user;
 
     fetch(`/api/v1/mentors/${ghId}`)
@@ -99,6 +116,7 @@ export default class EditMentor extends Component {
           mentor: Object.assign(this.state.mentor, mentor[0]),
           PATCH: true
         })
+        // this.checkForCheckbox();
       } else {
         this.setState({ PATCH: false })
         return
@@ -319,7 +337,8 @@ export default class EditMentor extends Component {
                 type='checkbox'
                 name='pairing_location'
                 value='turing'
-                onChange={event => this.updateProperty(event)}
+                // checked={this.state.turing}
+                onChange={event => this.updateCheckboxes(event)}
               />
               <label htmlFor='profile-pair-turing'>at Turing</label>
 
@@ -328,7 +347,11 @@ export default class EditMentor extends Component {
                 type='checkbox'
                 name='pairing_location'
                 value='off-campus'
-                onChange={event => this.updateProperty(event)}
+                // checked={this.state.off_campus}
+                onChange={event => {
+                  this.updateCheckboxes(event)
+                }
+              }
               />
               <label htmlFor='profile-pair-offcampus'>off campus</label>
 
@@ -337,7 +360,8 @@ export default class EditMentor extends Component {
                 type='checkbox'
                 name='pairing_location'
                 value='remote'
-                onChange={event => this.updateProperty(event)}
+                // checked={this.state.remote}
+                onChange={event => this.updateCheckboxes(event)}
               />
               <label htmlFor='profile-pair-remote'>remote</label>
             </div>
