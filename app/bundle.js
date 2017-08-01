@@ -12459,9 +12459,7 @@ var history = (0, _createBrowserHistory2.default)();
     _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_reactRouterDom.Route, { to: '/', render: function render() {
-                return _react2.default.createElement(_App2.default, { className: 'app-' });
-            } })
+        _react2.default.createElement(_reactRouterDom.Route, { to: '/', component: _App2.default })
     )
 ), document.getElementById('main'));
 
