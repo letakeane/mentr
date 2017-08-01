@@ -84,7 +84,7 @@ app.get('/gh_auth_token/:token', (req, response) => {
 
 
 app.get('/authenticate', (request, response) => {
-  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`);
+  response.redirect(302, 'https://github.com/login/oauth/authorize?scope=user:email&client_id=5a67289f9670bc02530b');
 });
 
 app.get('/api/v1/mentors', (request, response) => {
