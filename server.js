@@ -11,6 +11,8 @@ const request = require('request');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('app'));
+
 app.use((req, res, next) => {
    res.header('Access-Control-Allow-Origin', '*');
    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
@@ -20,7 +22,22 @@ app.use((req, res, next) => {
 
 app.set('port', process.env.PORT || 1701);
 
+if(process.env.NODE_ENV !== 'production') {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const config = require('./webpack.config.js');
+  const compiler = webpack(config);
+
+  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }))
+}
+
 app.locals.title = 'Mentr';
+
 
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
@@ -65,19 +82,6 @@ app.get('/gh_auth_token/:token', (req, response) => {
   })
 });
 
-if(process.env.NODE_ENV !== 'production') {
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('./webpack.config.js');
-  const compiler = webpack(config);
-
-  app.use(webpackHotMiddleware(compiler));
-  app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }))
-}
 
 app.get('/authenticate', (request, response) => {
   response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`);
