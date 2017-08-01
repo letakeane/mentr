@@ -8,11 +8,18 @@ body {
   margin: 0;
 }
 
-input[type=submit] {
+input[type=submit],
+.toggle-view-btn {
   border: none;
   background-color: #000;
   color: #fff;
   text-transform: uppercase;
+}
+
+input[type=submit]:hover,
+.toggle-view-btn:hover {
+  color: #9EF8FE;
+  cursor: pointer;
 }
 
 h1 {
@@ -112,6 +119,85 @@ input[type=checkbox] {
 }
 
 
+/* --- MentorCard --- */
+
+.mc-bottom-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mc-dev-type {
+  font-weight: 300;
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.mc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  border: 2px solid #9EF8FE;
+}
+
+.mc-img {
+  max-height: 200px;
+  max-width: 200px;
+  border-radius: 50%;
+}
+
+.mc-name {
+  font-size: 2.5rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mc-h3 {
+  /*align-items: center;*/
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 1.1rem;
+}
+
+.mc-details,
+.mc-h3 {
+  font-weight: 300;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.mc-location {
+  font-weight: 300;
+  font-size: 1.9rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.login-prompt {
+  font-size: 1.9rem;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mc-details {
+  max-width: 400px;
+  font-size: .9rem;
+}
+
+.toggle-view-btn {
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 1em;
+  margin-bottom: 20px;
 
 
 

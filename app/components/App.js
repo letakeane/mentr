@@ -97,13 +97,11 @@ export default class App extends Component {
   }
 
   showSingleMentor(mentor) {
-    // console.log(this.props.location, ' location')
-    // console.log(this.state.user, 'user')
     if(this.props.location.pathname === '/'  && mentor) {
       return (
         <div>
           <MentorCard mentor={mentor} />
-          <p>LOGIN TO SEE MORE MENTORS</p>
+          <p className='login-prompt' >*LOGIN TO SEE MORE MENTORS*</p>
         </div>
       )
     }
