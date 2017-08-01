@@ -59,7 +59,6 @@ export default class AddStudent extends Component {
     fetch(`/api/v1/students/${ghId}`)
       .then(response => response.json())
       .then(student => {
-        console.log(student);
         if (student.length === 1) {
           this.setState({
             student: Object.assign(this.state.student, student[0]),
@@ -89,7 +88,7 @@ export default class AddStudent extends Component {
               type="text"
               name="preferred_name"
               placeholder="Preferred Name"
-              value={this.state.preferred_name}
+              value={this.state.student.preferred_name}
               onChange={event => this.updateProperty(event)}
               required
             />
@@ -118,7 +117,7 @@ export default class AddStudent extends Component {
               type="text"
               name="slack"
               placeholder="Slack Handle"
-              value={this.state.slack}
+              value={this.state.student.slack}
               onChange={event => this.updateProperty(event)}
               required
             />
@@ -130,7 +129,7 @@ export default class AddStudent extends Component {
               type="email"
               name="email"
               placeholder="email@youremail.com"
-              value={this.state.email}
+              value={this.state.student.email}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -140,7 +139,7 @@ export default class AddStudent extends Component {
               type="text"
               name="stack_interests"
               placeholder="Stack Interests"
-              value={this.state.stack_interests}
+              value={this.state.student.stack_interests}
               onChange={event => this.updateProperty(event)}
             />
           </label>
