@@ -189,6 +189,7 @@ describe('top level befores', () => {
         });
     });
   });
+});
 
   describe('student routes', (done) => {
 
@@ -272,6 +273,8 @@ describe('top level befores', () => {
               done();
             });
         });
+        });
+    
     });
   });
 });
