@@ -30,7 +30,7 @@ export const StudentHome = (props) => {
       <img src={props.user.avatar_url} id='user-image' />
       <Link
         to='/create-student'
-        class='student-edit-link'>
+        className='student-edit-link'>
         EDIT PROFILE
       </Link>
       <FindMentors

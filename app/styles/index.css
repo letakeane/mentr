@@ -54,6 +54,26 @@ h2 {
   font-weight: 700;
 }
 
+/*CHOOSE STATUS*/
+.choose-link-box {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  margin: auto;
+}
+
+.choose-link {
+  box-sizing: border-box;
+  background-color: #032647;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px;
+}
+
+.choose-link:hover {
+  background-color: #1B5287;
+}
+
 /*CREATE PROFILE*/
 #create-profile-form {
   display: block;
@@ -89,4 +109,15 @@ input[type=checkbox] {
 
 .buttons:hover {
   cursor: pointer;
+}
+
+
+
+
+
+/*MEDIA BREAKS*/
+@media screen and (max-width: 900px) {
+  .choose-link-box {
+    width: 95%;
+  }
 }
