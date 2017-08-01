@@ -75,6 +75,15 @@ describe('top level befores', () => {
       });
     });
 
+    it('should not get a program that does not exist', (done) => {
+      chai.request(server)
+      .get('/api/v1/programs/100')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+
   });
 
   describe('mentor routes', (done) => {
@@ -103,6 +112,15 @@ describe('top level befores', () => {
       });
     });
 
+    it('should not get a mentor that does not exist', (done) => {
+      chai.request(server)
+      .get('/api/v1/mentors/10000000')
+      .end((err, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+
     it('should post a mentor', (done) => {
       chai.request(server)
       .post('/api/v1/mentors')
@@ -114,13 +132,32 @@ describe('top level befores', () => {
       });
     });
 
+
     it('should delete a mentor', (done) => {
       chai.request(server)
-      .delete('/api/v1/mentors/1')
+      .delete('/api/v1/mentors/17582916')
       .send()
       .end((error, response) => {
 
         response.should.have.status(204);
+
+        chai.request(server)
+        .get('/api/v1/mentors')
+        .end((err, response) => {
+
+          response.body.length.should.equal(2);
+        })
+      done();
+      });
+    });
+
+    it('should not delete a mentor that does not exist', (done) => {
+      chai.request(server)
+      .delete('/api/v1/mentors/999999999')
+      .send()
+      .end((error, response) => {
+
+        response.should.have.status(404);
 
         chai.request(server)
         .get('/api/v1/mentors')
@@ -176,6 +213,15 @@ describe('top level befores', () => {
         response.should.be.json;
         response.body[0].should.be.a('object');
         response.body.length.should.equal(1);
+        done();
+      });
+    });
+
+    it('should not get a student that does not exist', (done) => {
+      chai.request(server)
+      .get('/api/v1/students/10000000')
+      .end((err, response) => {
+        response.should.have.status(404);
         done();
       });
     });
