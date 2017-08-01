@@ -21,11 +21,12 @@ describe('top level befores', () => {
   before(done => {
     database.migrate.latest()
       .then(() => {
-        return database.seed.run()
+        database.seed.run()
         .then(() => {
           done();
         });
     });
+    // done();
   });
 
   beforeEach((done) => {

@@ -12,11 +12,14 @@ const createProgram = (knex, program) => {
   }, 'id');
 };
 
+
 const createStudent = (knex, student) => {
-  const { preferred_name, slack, email, stack_interests, program_id, id } = student;
+  const { gh_id, preferred_name, slack, email, stack_interests, program_id, avatar_url, id } = student;
 
   return knex('students').insert({
+    gh_id,
     preferred_name,
+    avatar_url,
     slack,
     email,
     stack_interests,
@@ -26,13 +29,17 @@ const createStudent = (knex, student) => {
 };
 
 const createMentor = (knex, mentor) => {
-  const { preferred_name, slack, email, location, phone, accepting_new, availability, company, position, dev_type, stack, pairing_location, id } = mentor;
+  const { gh_id, preferred_name, slack, email, location, phone, accepting_new, availability, company, position, dev_type, stack, pairing_location, avatar_url, preferred_contact, bio } = mentor;
 
   return knex('mentors').insert({
+    gh_id,
     preferred_name,
+    preferred_contact,
+    bio,
     slack,
     email,
     location,
+    avatar_url,
     phone,
     accepting_new,
     availability,
@@ -40,8 +47,7 @@ const createMentor = (knex, mentor) => {
     position,
     dev_type,
     stack,
-    pairing_location,
-    id
+    pairing_location
   }, 'id');
 };
 

@@ -10,7 +10,7 @@
   "scripts": {
     "build-css": "node-sass --include-path scss main.scss main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "./node_modules/mocha/bin/mocha --timeout 3000",
     "build": "webpack --config ./webpack.config.js",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "start": "npm build && nodemon server.js"
