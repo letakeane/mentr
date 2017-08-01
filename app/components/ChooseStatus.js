@@ -6,8 +6,10 @@ export const ChooseStatus = (props) => {
   return(
     <div>
       <h2>I AM A:</h2>
-      <Link to='/create-student' className='button'>STUDENT</Link>
-      <Link to='/edit-mentor' className='button'>MENTOR</Link>
+      <div className='choose-link-box'>
+        <Link to='/create-student' className='button' className='choose-link'>STUDENT</Link>
+        <Link to='/edit-mentor' className='choose-link'>MENTOR</Link>
+      </div>
     </div>
   )
 }
