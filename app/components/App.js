@@ -40,6 +40,7 @@ export default class App extends Component {
 
   setAppState() {
     const codeParam = this.props.location.search;
+console.log('codeParam: ', codeParam);
     const githubAuthCode = codeParam.split("=")[1];
     if (!this.state.githubAuthCode) {
       this.setState({
