@@ -12,8 +12,8 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "test": "./node_modules/mocha/bin/mocha",
     "build": "webpack --config ./webpack.config.js",
-    "start": "npm build && nodemon server.js",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
+    "start": "npm build && nodemon server.js"
   },
   "repository": {
     "type": "git",
