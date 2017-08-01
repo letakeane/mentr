@@ -113,7 +113,6 @@ export default class EditMentor extends Component {
     this.setState({
       [value]: !this.state[value]
     })
-    console.log(this.state);
   }
 
   checkDatabase() {
@@ -151,7 +150,7 @@ export default class EditMentor extends Component {
       })
     }
   }
-  
+
   checkCheckboxes() {
     if(this.state.mentor.pairing_location.includes('turing')) {
       this.setState({

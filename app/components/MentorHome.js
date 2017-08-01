@@ -16,7 +16,6 @@ export default class MentorHome extends Component {
     fetch(`/api/v1/mentors/${user.ghId}`)
     .then(resp => resp.json())
     .then(mentors => {
-      console.log('fetch results: ', mentors);
       this.setState({ mentor: mentors[0] });
     })
     .catch(error => {
