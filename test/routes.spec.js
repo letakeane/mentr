@@ -93,7 +93,7 @@ describe('top level befores', () => {
 
     it('should get a specific mentor', (done) => {
       chai.request(server)
-      .get('/api/v1/mentors/1')
+      .get('/api/v1/mentors/17582916')
       .end((err, response) => {
         response.should.have.status(200);
         response.should.be.json;
@@ -126,7 +126,7 @@ describe('top level befores', () => {
         .get('/api/v1/mentors')
         .end((err, response) => {
 
-          response.body.length.should.equal(2);
+          response.body.length.should.equal(3);
         })
       done();
       });
@@ -141,13 +141,13 @@ describe('top level befores', () => {
         response.should.have.status(201);
 
         chai.request(server)
-        .get('/api/v1/mentors/1')
+        .get('/api/v1/mentors/17582916')
         .end((err, response) => {
 
           response.should.have.status(200);
           response.should.be.json;
           response.body[0].should.be.a('object');
-          response.body[0].preferred_contact.should.equal('email');
+          response.body[0].preferred_contact.should.equal('slack');
         done();
         });
       });
@@ -163,14 +163,14 @@ describe('top level befores', () => {
         response.should.have.status(200);
         response.should.be.json;
         response.body[0].should.be.a('object');
-        response.body.length.should.equal(3);
+        response.body.length.should.equal(1);
         done();
       });
     });
 
     it('should get a specific student', (done) => {
       chai.request(server)
-      .get('/api/v1/students/1')
+      .get('/api/v1/students/22563791')
       .end((err, response) => {
         response.should.have.status(200);
         response.should.be.json;
@@ -193,7 +193,7 @@ describe('top level befores', () => {
 
     it('should delete a student', (done) => {
       chai.request(server)
-      .delete('/api/v1/students/1')
+      .delete('/api/v1/students/22563791')
       .send()
       .end((error, response) => {
 
@@ -203,7 +203,7 @@ describe('top level befores', () => {
         .get('/api/v1/students')
         .end((err, response) => {
 
-          response.body.length.should.equal(2);
+          response.body.length.should.equal(0);
         })
       done();
       });
@@ -211,20 +211,20 @@ describe('top level befores', () => {
 
     it('should edit a student', (done) => {
       chai.request(server)
-      .patch('/api/v1/students/1')
+      .patch('/api/v1/students/22563791')
       .send(testStudentPatch)
       .end((err, response) => {
 
         response.should.have.status(201);
 
         chai.request(server)
-        .get('/api/v1/students/1')
+        .get('/api/v1/students/22563791')
         .end((err, response) => {
 
           response.should.have.status(200);
           response.should.be.json;
           response.body[0].should.be.a('object');
-          response.body[0].preferred_name.should.equal('Peter Parker');
+          response.body[0].preferred_name.should.equal('Leta Keane');
         done();
         });
       });

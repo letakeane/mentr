@@ -266,7 +266,7 @@ app.delete('/api/v1/mentors/:id', (request, response) => {
 app.delete('/api/v1/students/:id', (request, response) => {
   const { id } = request.params;
 
-  database('students').where('id', id).del()
+  database('students').where('gh_id', id).del()
     .then(qty => {
       response.status(204).json({ qty });
     })
