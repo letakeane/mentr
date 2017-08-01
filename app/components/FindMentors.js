@@ -37,7 +37,7 @@ export class FindMentors extends Component {
       let pushing = true;
 
       selectedKeys.forEach( key => {
-        console.log(mentor[key], ' <men val, search val>',  searchParams[key])
+        console.log(mentor.preferred_name, mentor[key], ' <men val, search val>',  searchParams[key])
         if (!mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
           pushing = false;
         }
