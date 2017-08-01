@@ -15,3 +15,4 @@ render(<BrowserRouter history={history} >
     <Route to='/' component={App}/>
   </div>
 </BrowserRouter>, document.getElementById('main'))
+

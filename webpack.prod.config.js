@@ -22,13 +22,12 @@ module.exports = {
          presets: ['es2015', 'react']
        }
      },
-
     { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
-  },
-  node: {
-    fs: 'empty'
-  },
+   },
+   node: {
+     fs: 'empty'
+   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss', '.css']
   }

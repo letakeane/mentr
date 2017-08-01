@@ -6,12 +6,12 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 const path = require('path');
-const config = require('dotenv').config().parsed;
-const clientId = config.CLIENT_ID;
 const request = require('request');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('app'));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -22,12 +22,25 @@ app.use((req, res, next) => {
 
 app.set('port', process.env.PORT || 1701);
 
+if(process.env.NODE_ENV !== 'production') {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const config = require('./webpack.config.js');
+  const compiler = webpack(config);
+
+  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }))
+}
+
 app.locals.title = 'Mentr';
+
 
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname + '/app/index.html'))
-  // response.sendFile('./styles/index.scss')
-  // response.sendFile('./scripts/index.js')
 });
 
 app.get('/callback', (request, response) => {
@@ -46,7 +59,7 @@ app.get('/mentor-profile', (request, response) => {
 app.post('/gh_auth_code/:code', (req, response) => {
   let { code } = req.params;
 
-  let url = `https://github.com/login/oauth/access_token?client_id=5a67289f9670bc02530b&client_secret=b5e285e8796c7a511070352d888dfe8a4d8316f3&code=${code}`
+  let url = `https://github.com/login/oauth/access_token?client_id=5a67289f9670bc02530b&client_secret=b5e285e8796c7a511070352d888dfe8a4d8316f3&redirect_uri=https://turing-mentr.herokuapp.com/callback&code=${code}`
 
   request({uri: url}, function (error, res, body) {
     if (!error && res.statusCode == 200) {
@@ -71,22 +84,8 @@ app.get('/gh_auth_token/:token', (req, response) => {
   })
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('./webpack.config.js');
-  const compiler = webpack(config);
-
-  app.use(webpackHotMiddleware(compiler));
-  app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }))
-}
-
 app.get('/authenticate', (request, response) => {
-  response.redirect(302, `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}`);
+  response.redirect(302, 'https://github.com/login/oauth/authorize?scope=user:email&client_id=5a67289f9670bc02530b');
 });
 
 app.get('/api/v1/mentors', (request, response) => {

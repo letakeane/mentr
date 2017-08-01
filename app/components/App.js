@@ -124,19 +124,22 @@ export default class App extends Component {
           clearState={this.clearState} />
         <Switch>
           <Route path="/callback" render={(props) => <Callback
-            setUser={this.setUser}
-            user={user}
-            history={history}
-            code={githubAuthCode} /> }/>
+              className='callback-'
+              setUser={this.setUser}
+              user={user}
+              history={history}
+              code={githubAuthCode} /> }/>
+
           <Route path='/student-profile' render={(props) => <StudentHome
+            className='student-home-'
             user={user}
             mentors={this.mentors}
             matchingMentors={matchingMentors}
             getFilteredMentors={this.getFilteredMentors} />}/>
-          <Route path='/mentor-profile' render={(props) => <MentorHome user={user} currentMentor={currentMentor}/>}/>
-          <Route path='/choose-status' render={(props) => <ChooseStatus user={user} />}/>
-          <Route path='/create-student' render={(props) => <AddStudent user={user} history={history} />}/>
-          <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>
+          <Route path='/mentor-profile' render={(props) => <MentorHome className='mentor-home-' user={user} currentMentor={currentMentor}/>}/>
+          <Route path='/choose-status' render={(props) => <ChooseStatus className='choose-status-' user={user} />}/>
+          <Route path='/create-student' render={(props) => <AddStudent className='add-student-' user={user} history={history} />}/>
+          <Route path='/edit-mentor' render={(props) => <EditMentor className='edit-mentor-' user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>
 
         </Switch>
         {this.showSingleMentor(this.mentors[0])}

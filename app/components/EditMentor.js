@@ -115,7 +115,6 @@ export default class EditMentor extends Component {
     this.setState({
       [value]: !this.state[value]
     })
-    console.log(this.state);
   }
 
   checkDatabase() {

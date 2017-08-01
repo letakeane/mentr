@@ -21,8 +21,7 @@ export default class MentorCard extends Component  {
     const { preferred_name, bio, avatar_url, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
     let view = this.state.showMore ? 'Show Less' : 'Show More';
 
-    console.log('mentorcard', this.props)
-    if (!this.state.showMore) {
+    if(!this.state.showMore) {
       return (
         <div className='mc-wrapper' >
           <h3 className='mc-dev-type' >{dev_type}</h3>

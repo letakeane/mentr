@@ -5,7 +5,6 @@ export const Callback = props => {
     if (!code || props.user) {
       return
     }
-    console.log(code, 'code 1st')
     fetch(`/gh_auth_code/${code}`, { method: 'POST' })
       .then(resp => {
         return resp.json()
@@ -23,7 +22,6 @@ export const Callback = props => {
   };
 
   const postLoginRedirect = (ghId) => {
-    console.log(ghId, 'ghid 3rd')
     fetch(`/api/v1/students/${ghId}`)
       .then(response => response.json())
       .then(data => {
@@ -47,36 +45,35 @@ export const Callback = props => {
   };
 
   const fetchUser = (token) => {
-    console.log(token, 'fetchuser token 2nd')
 
     fetch(`/gh_auth_token/${token}`, {
       method: 'GET'
     })
-      .then(resp => {
-        return resp.json()
-      })
-      .then(data => {
-        const userData = JSON.parse(data);
-        const { avatar_url, name, location, company, bio }  = userData;
-        const user = {
-          avatar_url,
-          ghId: userData.id,
-          name,
-          location,
-          company,
-          bio
-        }
-
-        props.setUser(user);
-        postLoginRedirect(user.ghId);
-      })
-      .catch(error => {
-        response.status(500).json({ error });
-      });
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      const userData = JSON.parse(data);
+      const { avatar_url, name, location, company, bio }  = userData;
+      const user = {
+        avatar_url,
+        ghId: userData.id,
+        name,
+        location,
+        company,
+        bio
+      }
+      props.setUser(user);
+      postLoginRedirect(user.ghId);
+    })
+    .catch(error => {
+      resp.status(500).json({ error });
+    });
   };
 
   login(props.code);
-  return (
+
+  return(
     <div></div>
   )
 }
