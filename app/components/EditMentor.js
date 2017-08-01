@@ -26,9 +26,12 @@ export default class EditMentor extends Component {
       },
       errorStatus: '',
       PATCH: false,
-      // turing: '',
-      // off_campus: '',
-      // remote: ''
+      turing: false,
+      remote: false,
+      'off-campus': false,
+      slack: false,
+      email: false,
+      phone: false
     };
   }
 
@@ -105,6 +108,14 @@ export default class EditMentor extends Component {
     }
   }
 
+  toggleClass(event) {
+    const { value } = event.target;
+    this.setState({
+      [value]: !this.state[value]
+    })
+    console.log(this.state);
+  }
+
   checkDatabase() {
     const { ghId } = this.props.user;
 
@@ -116,12 +127,49 @@ export default class EditMentor extends Component {
           mentor: Object.assign(this.state.mentor, mentor[0]),
           PATCH: true
         })
-        // this.checkForCheckbox();
+        this.checkPreferredContact()
+        this.checkCheckboxes();
       } else {
         this.setState({ PATCH: false })
         return
       }
     })
+  }
+
+  checkPreferredContact() {
+    if(this.state.mentor.preferred_contact.includes('slack')) {
+      this.setState({
+        slack: true
+      })
+    } else if (this.state.mentor.preferred_contact.includes('email')) {
+      this.setState({
+        email: true
+      })
+    } else if (this.state.mentor.preferred_contact.includes('phone')) {
+      this.setState({
+        phone: true
+      })
+    }
+  }
+  
+  checkCheckboxes() {
+    if(this.state.mentor.pairing_location.includes('turing')) {
+      this.setState({
+        turing: true
+      })
+    }
+
+    if (this.state.mentor.pairing_location.includes('remote')) {
+      this.setState({
+        remote: true
+      })
+    }
+
+    if (this.state.mentor.pairing_location.includes('off-campus')) {
+      this.setState({
+        'off-campus': true
+      })
+    }
   }
 
   errorMessage() {
@@ -226,6 +274,8 @@ export default class EditMentor extends Component {
                 id='profile-prefer-slack'
                 name='preferred_contact'
                 value='slack'
+                checked={this.state.slack}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
                 required
               />
@@ -236,6 +286,8 @@ export default class EditMentor extends Component {
                 type='radio'
                 name='preferred_contact'
                 value='email'
+                checked={this.state.email}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-prefer-email'>Email</label>
@@ -245,6 +297,8 @@ export default class EditMentor extends Component {
                 type='radio'
                 name='preferred_contact'
                 value='phone'
+                checked={this.state.phone}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-prefer-phone'>Phone</label>
@@ -337,7 +391,8 @@ export default class EditMentor extends Component {
                 type='checkbox'
                 name='pairing_location'
                 value='turing'
-                // checked={this.state.turing}
+                checked={this.state.turing}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateCheckboxes(event)}
               />
               <label htmlFor='profile-pair-turing'>at Turing</label>
@@ -347,11 +402,9 @@ export default class EditMentor extends Component {
                 type='checkbox'
                 name='pairing_location'
                 value='off-campus'
-                // checked={this.state.off_campus}
-                onChange={event => {
-                  this.updateCheckboxes(event)
-                }
-              }
+                checked={this.state['off-campus']}
+                onClick={(event) => this.toggleClass(event)}
+                onChange={event => this.updateCheckboxes(event)}
               />
               <label htmlFor='profile-pair-offcampus'>off campus</label>
 
@@ -360,7 +413,8 @@ export default class EditMentor extends Component {
                 type='checkbox'
                 name='pairing_location'
                 value='remote'
-                // checked={this.state.remote}
+                checked={this.state.remote}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateCheckboxes(event)}
               />
               <label htmlFor='profile-pair-remote'>remote</label>
