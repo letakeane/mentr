@@ -26,12 +26,14 @@ export default class EditMentor extends Component {
       },
       errorStatus: '',
       PATCH: false,
-      turing: false,
-      remote: false,
-      'off-campus': false,
-      slack: false,
-      email: false,
-      phone: false
+      turing: '',
+      remote: '',
+      'off-campus': '',
+      slack: '',
+      email: '',
+      phone: '',
+      y: '',
+      n: ''
     };
   }
 
@@ -130,6 +132,7 @@ export default class EditMentor extends Component {
           })
           this.checkPreferredContact()
           this.checkCheckboxes();
+          this.checkAccepting()
         } else {
           this.setState({ PATCH: false })
           return
@@ -169,6 +172,20 @@ export default class EditMentor extends Component {
     if (this.state.mentor.pairing_location.includes('off-campus')) {
       this.setState({
         'off-campus': true
+      })
+    }
+  }
+
+  checkAccepting() {
+    if (this.state.mentor.accepting_new.includes('y')) {
+      this.setState({
+        y: true
+      })
+    }
+
+    if (this.state.mentor.accepting_new.includes('n')) {
+      this.setState({
+        n: true
       })
     }
   }
@@ -313,6 +330,8 @@ export default class EditMentor extends Component {
                 type='radio'
                 name='accepting_new'
                 value='y'
+                checked={this.state.y}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-new-yes'>Yes</label>
@@ -322,6 +341,8 @@ export default class EditMentor extends Component {
                 type='radio'
                 name='accepting_new'
                 value='n'
+                checked={this.state.n}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-new-no'>No</label>
