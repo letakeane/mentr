@@ -8,7 +8,7 @@ export default class MentorHome extends Component {
     super(props)
     this.state = {
       mentor: {}
-    }
+    };
   }
 
   getMentor() {
@@ -17,8 +17,11 @@ export default class MentorHome extends Component {
     .then(resp => resp.json())
     .then(mentors => {
       console.log('fetch results: ', mentors);
-      this.setState({ mentor: mentors[0] })
+      this.setState({ mentor: mentors[0] });
     })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
   }
 
   componentWillMount() {

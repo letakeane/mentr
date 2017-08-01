@@ -9,7 +9,8 @@ body {
 }
 
 input[type=submit],
-.toggle-view-btn {
+.toggle-view-btn,
+.student-edit-link {
   border: none;
   background-color: #000;
   color: #fff;
@@ -17,7 +18,8 @@ input[type=submit],
 }
 
 input[type=submit]:hover,
-.toggle-view-btn:hover {
+.toggle-view-btn:hover,
+.student-edit-link:hover {
   color: #9EF8FE;
   cursor: pointer;
 }
@@ -158,7 +160,6 @@ input[type=checkbox] {
 }
 
 .mc-h3 {
-  /*align-items: center;*/
   margin-left: 20px;
   margin-right: 20px;
   font-size: 1.1rem;
@@ -198,8 +199,32 @@ input[type=checkbox] {
   margin-top: 20px;
   font-size: 1em;
   margin-bottom: 20px;
+}
 
+/* --- student home --- */
 
+.student-home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#user-image {
+  border-radius: 50%;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+.student-edit-link {
+  padding: 10px;
+  margin: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.sh-mentor-container {
+  margin: auto;
+}
 
 /*MEDIA BREAKS*/
 @media screen and (max-width: 900px) {

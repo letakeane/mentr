@@ -15,6 +15,9 @@ export const Callback = props => {
       fetchUser(wholeString.split('&')[0]);
       }
     })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
   };
 
   const postLoginRedirect = (ghId) => {
@@ -23,7 +26,6 @@ export const Callback = props => {
     .then(data => {
       if (data[0]) {
         props.history.replace('/student-profile');
-        //set state using data
       } else {
         fetch(`/api/v1/mentors/${ghId}`)
         .then(resp => resp.json())
@@ -34,9 +36,12 @@ export const Callback = props => {
             props.history.replace('/choose-status');
           }
         })
+        .catch(error => {
+          response.status(500).json({ error });
+        });
       }
-    })
-  }
+    });
+  };
 
   const fetchUser = (token) => {
 
@@ -59,7 +64,10 @@ export const Callback = props => {
       }
       props.setUser(user);
       postLoginRedirect(user.ghId);
-     })
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
   };
 
   login(props.code);

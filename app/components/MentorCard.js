@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 export default class MentorCard extends Component  {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       showMore: false
@@ -18,7 +17,6 @@ export default class MentorCard extends Component  {
   }
 
   render() {
-    console.log(this.props, 'mentor props')
     const { preferred_name, bio, avatar_url, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
     let view = this.state.showMore ? 'Show Less' : 'Show More';
     if(!this.state.showMore) {
