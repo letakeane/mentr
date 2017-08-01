@@ -45,6 +45,18 @@ describe('top level befores', () => {
     });
   });
 
+  describe('base path', () => {
+    it('/ should return html', (done) => {
+      chai.request(server)
+        .get('/')
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.should.be.html;
+          done();
+        });
+    });
+  });
+
   describe('program routes', (done) => {
     it('should get the programs', (done) => {
       chai.request(server)
