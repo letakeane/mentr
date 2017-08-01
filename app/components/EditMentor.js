@@ -52,7 +52,7 @@ export default class EditMentor extends Component {
     } else {
       this.setState({
         mentor: Object.assign(this.state.mentor, {
-          pairing_location: this.state.mentor[name] + ', ' + value
+          pairing_location: this.state.mentor[name] + ' ' + value
         })
       })
     }

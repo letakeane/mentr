@@ -19,11 +19,12 @@ export default class MentorCard extends Component  {
   render() {
     const { preferred_name, bio, avatar_url, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
     let view = this.state.showMore ? 'Show Less' : 'Show More';
+    console.log('mentorcard', this.props)
     if(!this.state.showMore) {
       return (
         <div className='mc-wrapper' >
-          <h3 className='mc-dev-type' >{dev_type.toUpperCase()}</h3>
-          <h2 className='mc-name' >{preferred_name.toUpperCase()}</h2>
+          <h3 className='mc-dev-type' >{dev_type}</h3>
+          <h2 className='mc-name' >{preferred_name}</h2>
           <img className='mc-img' src={avatar_url} />
           <h3 className='mc-location' >{location}</h3>
           <div className='mc-bottom-container'>
@@ -36,7 +37,7 @@ export default class MentorCard extends Component  {
             <h3 className='mc-h3' >Stack:
               <p className='mc-details' >{stack}</p>
             </h3>
-            <h3 className='mc-h3' >Pairing Availability:
+            <h3 className='mc-h3' >Pairing Location:
               <p className='mc-details' >{pairing_location}</p>
           </h3>
           </div>
@@ -49,8 +50,8 @@ export default class MentorCard extends Component  {
     } else {
       return (
         <div className='mc-wrapper' >
-          <h3 className='mc-dev-type' >{dev_type.toUpperCase()}</h3>
-          <h2 className='mc-name' >{preferred_name.toUpperCase()}</h2>
+          <h3 className='mc-dev-type' >{dev_type}</h3>
+          <h2 className='mc-name' >{preferred_name}</h2>
           <img className='mc-img' src={avatar_url} />
           <h3 className='mc-location' >{location}</h3>
           <div className='mc-bottom-container'>
@@ -63,7 +64,7 @@ export default class MentorCard extends Component  {
             <h3 className='mc-h3' >Stack:
               <p className='mc-details' >{stack}</p>
             </h3>
-            <h3 className='mc-h3' >Pairing Availability:
+            <h3 className='mc-h3' >Pairing Location:
               <p className='mc-details' >{pairing_location}</p>
             </h3>
             <h3 className='mc-h3' >Company:

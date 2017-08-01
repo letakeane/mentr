@@ -30,9 +30,9 @@ export default class MentorHome extends Component {
 
   render() {
     return (
-      <div>
+      <div className='edit-wrapper'>
         <MentorCard mentor={this.state.mentor || this.props.currentMentor} />
-        <Link to='/edit-mentor'>EDIT PROFILE</Link>
+        <Link className='mentor-edit-link' to='/edit-mentor'>EDIT PROFILE</Link>
       </div>
     )
   }
