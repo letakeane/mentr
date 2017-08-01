@@ -22,9 +22,12 @@ export class FindMentors extends Component {
   }
 
   setSelectedKeys(searchParams) {
-    return Object.keys(searchParams).filter( param => {
+
+    let queries = Object.keys(searchParams).filter( param => {
       return searchParams[param];
     });
+    console.log(queries, 'queries')
+    return queries;
   }
 
   filterMentors(selectedKeys, searchParams) {
