@@ -11622,6 +11622,7 @@ var Callback = exports.Callback = function Callback(props) {
     fetch('/gh_auth_code/' + code, { method: 'POST' }).then(function (resp) {
       return resp.json();
     }).then(function (data) {
+      console.log('response from /gh_auth_code/CODE: ', data);
       var wholeString = data.split("=")[1];
       if (!wholeString.includes('error')) {
         fetchUser(wholeString.split('&')[0]);
@@ -11687,6 +11688,7 @@ var Callback = exports.Callback = function Callback(props) {
   };
 
   login(props.code);
+
   return _react2.default.createElement('div', null);
 };
 

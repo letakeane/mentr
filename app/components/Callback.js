@@ -11,6 +11,7 @@ export const Callback = props => {
       return resp.json()
     })
     .then(data => {
+console.log('response from /gh_auth_code/CODE: ', data);
       let wholeString = data.split("=")[1];
       if(!wholeString.includes('error')) {
       fetchUser(wholeString.split('&')[0]);
@@ -76,6 +77,7 @@ console.log('trying to redirect to student profile!');
   };
 
   login(props.code);
+
   return(
     <div></div>
   )
