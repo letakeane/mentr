@@ -6,42 +6,42 @@ export const Callback = props => {
       return
     }
     fetch(`/gh_auth_code/${code}`, { method: 'POST' })
-      .then(resp => {
-        return resp.json()
-      })
-      .then(data => {
-        let wholeString = data.split("=")[1];
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      let wholeString = data.split("=")[1];
+      if(!wholeString.includes('error')) {
+      fetchUser(wholeString.split('&')[0]);
+      }
+    })
+    .catch(error => {
+      console.log('Error retreiving github authorization code: ', error);
+    });
 
-        if (!wholeString.includes('error')) {
-          fetchUser(wholeString.split('&')[0]);
-        }
-      })
-      .catch(error => {
-        response.status(500).json({ error });
-      });
   };
 
   const postLoginRedirect = (ghId) => {
     fetch(`/api/v1/students/${ghId}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data[0]) {
-          props.history.replace('/student-profile');
-        } else {
-          fetch(`/api/v1/mentors/${ghId}`)
-            .then(resp => resp.json())
-            .then(mentorData => {
-              if (mentorData[0]) {
-                props.history.replace('/mentor-profile');
-              } else {
-                props.history.replace('/choose-status');
-              }
-            })
-            .catch(error => {
-              response.status(500).json({ error });
-            });
-        }
-      });
+    .then(response => response.json())
+    .then(data => {
+      if (data[0]) {
+        props.history.replace('/student-profile');
+      } else {
+        fetch(`/api/v1/mentors/${ghId}`)
+        .then(resp => resp.json())
+        .then(mentorData => {
+          if (mentorData[0]) {
+            props.history.replace('/mentor-profile');
+          } else {
+            props.history.replace('/choose-status');
+          }
+        })
+        .catch(error => {
+          console.log('Error retreiving info: ', error);
+        });
+      }
+    });
   };
 
   const fetchUser = (token) => {
@@ -67,7 +67,7 @@ export const Callback = props => {
       postLoginRedirect(user.ghId);
     })
     .catch(error => {
-      resp.status(500).json({ error });
+      console.log('Error retreiving github authorization token: ', error);
     });
   };
 
