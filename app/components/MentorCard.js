@@ -18,62 +18,73 @@ export default class MentorCard extends Component  {
   }
 
   render() {
-    const { preferred_name, bio, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
+    console.log(this.props, 'mentor props')
+    const { preferred_name, bio, avatar_url, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
     let view = this.state.showMore ? 'Show Less' : 'Show More';
     if(!this.state.showMore) {
       return (
-        <div>
-          <h2>{preferred_name}</h2>
-          <h3>Bio:
-            <p>{bio}</p>
+        <div className='mc-wrapper' >
+          <h3 className='mc-dev-type' >{dev_type.toUpperCase()}</h3>
+          <h2 className='mc-name' >{preferred_name.toUpperCase()}</h2>
+          <img className='mc-img' src={avatar_url} />
+          <h3 className='mc-location' >{location}</h3>
+          <div className='mc-bottom-container'>
+            <h3 className='mc-h3' >Bio:
+              <p className='mc-details' >{bio}</p>
+            </h3>
+            <h3 className='mc-h3' >Availability:
+              <p className='mc-details' >{availability}</p>
+            </h3>
+            <h3 className='mc-h3' >Stack:
+              <p className='mc-details' >{stack}</p>
+            </h3>
+            <h3 className='mc-h3' >Pairing Availability:
+              <p className='mc-details' >{pairing_location}</p>
           </h3>
-          <h3>Location:
-            <p>{location}</p>
-          </h3>
-          <h3>Stack:
-            <p>{stack}</p>
-          </h3>
-          <h3>Dev Type:
-            <p>{dev_type}</p>
-          </h3>
-          <button onClick={this.toggleView}> {view} </button>
+          </div>
+          
+          <button 
+            className='toggle-view-btn'
+            onClick={this.toggleView}> {view} </button>
         </div>
       )
     } else {
       return (
-        <div>
-          <h2>{preferred_name}</h2>
-          <h3>Bio:
-            <p>{bio}</p>
-          </h3>
-          <h3>Location:
-            <p>{location}</p>
-          </h3>
-          <h3>Stack:
-            <p>{stack}</p>
-          </h3>
-          <h3>Dev Type:
-            <p>{dev_type}</p>
-          </h3>
-          <h3>Position:
-            <p>{position}</p>
-          </h3>
-          <h3>Company:
-            <p>{company}</p>
-          </h3>
-          <h3>Availability:
-            <p>{availability}</p>
-          </h3>
-          <h3>Pairing Location:
-            <p>{pairing_location}</p>
-          </h3>
-          <h3>Contact:
-            <p>Preferred Form of Contact: {preferred_contact}</p>
-            <p>Slack: {slack}</p>
-            <p>Email: {email}</p>
-            <p>Phone: {phone}</p>
-          </h3>
-          <button onClick={this.toggleView}> {view} </button>
+        <div className='mc-wrapper' >
+          <h3 className='mc-dev-type' >{dev_type.toUpperCase()}</h3>
+          <h2 className='mc-name' >{preferred_name.toUpperCase()}</h2>
+          <img className='mc-img' src={avatar_url} />
+          <h3 className='mc-location' >{location}</h3>
+          <div className='mc-bottom-container'>
+            <h3 className='mc-h3' >Bio:
+              <p className='mc-details' >{bio}</p>
+            </h3>
+            <h3 className='mc-h3' >Availability:
+              <p className='mc-details' >{availability}</p>
+            </h3>
+            <h3 className='mc-h3' >Stack:
+              <p className='mc-details' >{stack}</p>
+            </h3>
+            <h3 className='mc-h3' >Pairing Availability:
+              <p className='mc-details' >{pairing_location}</p>
+            </h3>
+            <h3 className='mc-h3' >Company:
+              <p className='mc-h3' >{company}</p>
+            </h3>
+            <h3 className='mc-h3' >Position:
+              <p className='mc-h3' >{position}</p>
+            </h3>
+            <h3 className='mc-h3' >Contact:
+              <p className='mc-h3' >Preferred Form of Contact: {preferred_contact}</p>
+              <p className='mc-h3' >Slack: {slack}</p>
+              <p className='mc-h3' >Email: {email}</p>
+              <p className='mc-h3' >Phone: {phone}</p>
+            </h3>
+          </div>
+          
+          <button 
+            className='toggle-view-btn'
+            onClick={this.toggleView}> {view} </button>
         </div>
       )
     }
