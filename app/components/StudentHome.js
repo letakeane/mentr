@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { FindMentors } from './FindMentors';
-import { MentorCard } from './MentorCard';
+import MentorCard from './MentorCard';
 import { Link } from 'react-router-dom';
 
 

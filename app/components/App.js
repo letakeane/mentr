@@ -8,6 +8,8 @@ import { ChooseStatus } from './ChooseStatus.js';
 import EditMentor from './EditMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
 import AddStudent from './AddStudent';
+import MentorCard from './MentorCard';
+
 
 export default class App extends Component {
   constructor() {
@@ -16,7 +18,8 @@ export default class App extends Component {
       githubAuthCode: undefined,
       user: undefined,
       matchingMentors: [],
-      currentMentor: {}
+      currentMentor: {},
+      firstMentor: undefined
     }
     this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
@@ -57,10 +60,14 @@ export default class App extends Component {
   }
 
   getAllMentors() {
+    console.log(this.state.user, 'user get all')
     fetch('/api/v1/mentors')
     .then(response => response.json())
     .then(data => {
       this.mentors = data;
+      this.setState({
+        firstMentor: data[0]
+      })
     });
   }
 
@@ -71,7 +78,6 @@ export default class App extends Component {
 
   updateMentors(mentors) {
     this.setState({ mentors: [mentors]})
-    console.log(this.state);
   }
 
   setUser(user) {
@@ -87,6 +93,22 @@ export default class App extends Component {
     this.setState({
       matchingMentors: searchedMentors
     });
+  }
+
+  showSingleMentor(mentor) {
+    // console.log(this.props.location, ' location')
+    // console.log(this.state.user, 'user')
+    if(this.props.location.pathname === '/'  && mentor) {
+      return (
+        <div>
+          <MentorCard mentor={mentor} />
+          <p>LOGIN TO SEE MORE MENTORS</p>
+        </div>
+      )
+    }
+    return (
+      <div></div>
+    )
   }
 
   render() {
@@ -115,7 +137,7 @@ export default class App extends Component {
           <Route path='/edit-mentor' render={(props) => <EditMentor user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>
 
         </Switch>
-
+        {this.showSingleMentor(this.mentors[0])}
       </div>
     )
   }
