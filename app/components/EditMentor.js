@@ -331,6 +331,7 @@ export default class EditMentor extends Component {
                 name='accepting_new'
                 value='y'
                 checked={this.state.y}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-new-yes'>Yes</label>
@@ -341,6 +342,7 @@ export default class EditMentor extends Component {
                 name='accepting_new'
                 value='n'
                 checked={this.state.n}
+                onClick={(event) => this.toggleClass(event)}
                 onChange={event => this.updateProperty(event)}
               />
               <label htmlFor='profile-new-no'>No</label>
