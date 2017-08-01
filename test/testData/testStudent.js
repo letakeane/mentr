@@ -8,7 +8,7 @@ const testStudentComplete = {
 };
 
 const testStudentPatch = {
-  preferred_name: 'Peter Parker'
+  preferred_name: 'Leta Keane'
 }
 
 module.exports = { testStudentComplete, testStudentPatch };

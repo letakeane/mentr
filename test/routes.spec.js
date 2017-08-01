@@ -188,6 +188,7 @@ describe('top level befores', () => {
         });
     });
   });
+});
 
   describe('student routes', (done) => {
 
@@ -270,7 +271,8 @@ describe('top level befores', () => {
           response.body[0].preferred_name.should.equal('Leta Keane');
         done();
         });
+        });
+    
     });
   });
-
 });
