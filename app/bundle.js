@@ -12459,7 +12459,9 @@ var history = (0, _createBrowserHistory2.default)();
     _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_reactRouterDom.Route, { to: '/', component: _App2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { to: '/', render: function render() {
+                return _react2.default.createElement(_App2.default, { className: 'app-' });
+            } })
     )
 ), document.getElementById('main'));
 
@@ -24993,6 +24995,7 @@ var App = function (_Component) {
           null,
           _react2.default.createElement(_reactRouterDom.Route, { path: '/callback', render: function render(props) {
               return _react2.default.createElement(_Callback.Callback, {
+                className: 'callback-',
                 setUser: _this3.setUser,
                 user: user,
                 history: history,
@@ -25000,22 +25003,23 @@ var App = function (_Component) {
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/student-profile', render: function render(props) {
               return _react2.default.createElement(_StudentHome.StudentHome, {
+                className: 'student-home-',
                 user: user,
                 mentors: _this3.mentors,
                 matchingMentors: matchingMentors,
                 getFilteredMentors: _this3.getFilteredMentors });
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/mentor-profile', render: function render(props) {
-              return _react2.default.createElement(_MentorHome2.default, { user: user, currentMentor: currentMentor });
+              return _react2.default.createElement(_MentorHome2.default, { className: 'mentor-home-', user: user, currentMentor: currentMentor });
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/choose-status', render: function render(props) {
-              return _react2.default.createElement(_ChooseStatus.ChooseStatus, { user: user });
+              return _react2.default.createElement(_ChooseStatus.ChooseStatus, { className: 'choose-status-', user: user });
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/create-student', render: function render(props) {
-              return _react2.default.createElement(_AddStudent2.default, { user: user, history: history });
+              return _react2.default.createElement(_AddStudent2.default, { className: 'add-student-', user: user, history: history });
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/edit-mentor', render: function render(props) {
-              return _react2.default.createElement(_EditMentor2.default, { user: user, updateMentors: _this3.updateMentors, history: history, setCurrentMentor: _this3.setCurrentMentor });
+              return _react2.default.createElement(_EditMentor2.default, { className: 'edit-mentor-', user: user, updateMentors: _this3.updateMentors, history: history, setCurrentMentor: _this3.setCurrentMentor });
             } })
         ),
         this.showSingleMentor(this.mentors[0])

@@ -12,6 +12,6 @@ let history = createHistory();
 
 render(<BrowserRouter history={history} >
         <div>
-            <Route to='/' component={App}/>
+            <Route to='/' render={() => <App className='app-' />}/>
         </div>
      </BrowserRouter>, document.getElementById('main'))
