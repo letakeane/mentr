@@ -6,8 +6,6 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 const path = require('path');
-const config = require('dotenv').config().parsed;
-const clientId = config.CLIENT_ID;
 const request = require('request');
 
 app.use(bodyParser.json())
