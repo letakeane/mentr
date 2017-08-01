@@ -26,7 +26,9 @@ export const Callback = props => {
     fetch(`/api/v1/students/${ghId}`)
     .then(response => response.json())
     .then(data => {
+console.log('response from student fetch: ', data);
       if (data[0]) {
+console.log('trying to redirect to student profile!');
         props.history.replace('/student-profile');
       } else {
         fetch(`/api/v1/mentors/${ghId}`)
