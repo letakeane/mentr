@@ -20,7 +20,7 @@ export default class EditMentor extends Component {
         position: '',
         dev_type: '',
         stack: '',
-        pairing_location: [],
+        pairing_location: '',
         gh_id: this.props.user.ghId,
         avatar_url: this.props.user.avatar_url
       },
