@@ -15,8 +15,7 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'backend',
     stack: 'Ruby/Rails, Python/Django, yelling, yodeling, loud noises',
-    pairing_location: 'screenhero',
-    id: 1
+    pairing_location: 'screenhero'
   },
   {
     gh_id: 8650958,
@@ -34,8 +33,7 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'front end',
     stack: 'Node.js, React',
-    pairing_location: 'turing, screenhero',
-    id: 2
+    pairing_location: 'turing, screenhero'
   },
   {
     gh_id: 43102,
@@ -53,8 +51,7 @@ const mentors = [
     position: 'senior dev',
     dev_type: 'full stack',
     stack: 'Ruby/Rails, Python/Django, Node.js, React',
-    pairing_location: 'turing, screenhero',
-    id: 3
+    pairing_location: 'turing, screenhero'
   }
   // {
   //   gh_id: 23202538,

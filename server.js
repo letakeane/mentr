@@ -141,7 +141,7 @@ app.get('/api/v1/mentors/:gh_id', (request, response) => {
 
   database('mentors').where('gh_id', gh_id).select()
     .then(mentor => {
-      if (mentor) {
+      if (mentor && mentor.length) {
         response.status(200).json(mentor)
       } else {
         return response.status(404).json({
@@ -159,7 +159,7 @@ app.get('/api/v1/students/:gh_id', (request, response) => {
 
   database('students').where('gh_id', gh_id).select()
     .then(student => {
-      if (student) {
+      if (student && student.length) {
         response.status(200).json(student)
       } else {
         return response.status(404).json({
@@ -177,7 +177,7 @@ app.get('/api/v1/programs/:id', (request, response) => {
 
   database('programs').where('id', id).select()
     .then(program => {
-      if (program) {
+      if (program && program.length) {
         response.status(200).json(program)
       } else {
         return response.status(404).json({
@@ -199,7 +199,7 @@ app.post('/api/v1/mentors', (request, response) => {
       if (mentor) {
         response.status(201).json({ id: mentor[0] });
       } else {
-        response.status(201).json({ error: 'You are missing a property'});
+        response.status(422).json({ error: 'You are missing a property'});
       }
     })
     .catch(error => {
@@ -251,22 +251,26 @@ app.patch('/api/v1/students/:gh_id', (request, response) => {
     });
 });
 
-app.delete('/api/v1/mentors/:id', (request, response) => {
-  const { id } = request.params;
+app.delete('/api/v1/mentors/:gh_id', (request, response) => {
+  const { gh_id } = request.params;
 
-  database('mentors').where('id', id).del()
+  database('mentors').where('gh_id', gh_id).del()
     .then(qty => {
-      response.status(204).json({ qty });
+      if (qty) {
+        response.status(204).json({ qty });
+      } else {
+        response.status(404).json({ error: 'that mentor was not found' })
+      }
     })
     .catch(error => {
       response.status(500).json({ error });
     });
 });
 
-app.delete('/api/v1/students/:id', (request, response) => {
-  const { id } = request.params;
+app.delete('/api/v1/students/:gh_id', (request, response) => {
+  const { gh_id } = request.params;
 
-  database('students').where('id', id).del()
+  database('students').where('gh_id', gh_id).del()
     .then(qty => {
       response.status(204).json({ qty });
     })
