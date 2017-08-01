@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const ChooseStatus = (props) => {
 
-  return(
+  return (
     <div>
       <h2>I AM A:</h2>
       <div className='choose-link-box'>

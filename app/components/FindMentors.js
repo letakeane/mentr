@@ -29,13 +29,15 @@ export class FindMentors extends Component {
 
   filterMentors(selectedKeys, searchParams) {
     const targetMentors = [];
+
     this.allMentors.forEach( mentor => {
       let pushing = true;
+
       selectedKeys.forEach( key => {
-        if(!mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
+        if (!mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
           pushing = false;
         }
-        if(pushing) {
+        if (pushing) {
           targetMentors.push(mentor);
         }
       });
@@ -45,6 +47,7 @@ export class FindMentors extends Component {
 
   updateProperty(e) {
     const { name, value } = e.target;
+
     this.setState({
       searchParams: Object.assign(this.state.searchParams, {
         [name]: value
@@ -55,37 +58,38 @@ export class FindMentors extends Component {
   render() {
     const { getFilteredMentors } = this.props;
     let { searchParams } = this.state;
-    return(
+
+    return (
       <div>
         <h2>Search for a Mentor</h2>
-        <form 
+        <form
           onSubmit={e => getFilteredMentors(e, searchParams, this.setSelectedKeys, this.filterMentors )}>
-          <label> Name 
+          <label> Name
             <input
               type='text'
               name='preferred_name'
               placeholder='Jane Doe'
               value={this.state.searchParams.preferred_name}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
-          <label> Location 
+          <label> Location
             <input
               type='text'
               name='location'
               placeholder='Denver, CO'
               value={this.state.searchParams.location}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
-          <label> Preferred Form of Contact 
+          <label> Preferred Form of Contact
             <input
               type='text'
               name='preferred_contact'
               placeholder='Slack'
               value={this.state.searchParams.preferred_contact}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
           <label> Company
             <input
@@ -94,34 +98,34 @@ export class FindMentors extends Component {
               placeholder='SendGrid'
               value={this.state.searchParams.company}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
-          <label> Dev Type 
+          <label> Dev Type
             <input
               type='text'
               name='dev_type'
               placeholder='Frontend, backend, or full stack'
               value={this.state.searchParams.dev_type}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
-          <label> Stack 
+          <label> Stack
             <input
               type='text'
               name='stack'
               placeholder='Ruby'
               value={this.state.searchParams.stack}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
-          <label> Pairing Location 
+          <label> Pairing Location
             <input
               type='text'
               name='pairing_location'
               placeholder='Turing'
               value={this.state.searchParams.pairing_location}
               onChange={e => this.updateProperty(e)}
-              />
+            />
           </label>
           <input
             className='buttons'
@@ -134,4 +138,3 @@ export class FindMentors extends Component {
     )
   }
 }
-

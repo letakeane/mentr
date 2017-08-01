@@ -13,7 +13,8 @@ export const Header = ({ user, clearState }) => {
       return (
         <a id="log-out" href='/' onClick={(e) => {
           e.preventDefault();
-          clearState(); }}>
+          clearState();
+        }}>
         LOG OUT
         </a>
       )

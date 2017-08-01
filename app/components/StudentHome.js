@@ -17,7 +17,7 @@ export const StudentHome = (props) => {
       });
     } else {
       return props.matchingMentors.map( mentor => {
-        return(
+        return (
           <MentorCard mentor={mentor} key={mentor.id} />
         )
       });
@@ -37,9 +37,9 @@ export const StudentHome = (props) => {
         matchingMentors={props.matchingMentors}
         getFilteredMentors={props.getFilteredMentors}
         mentors={props.mentors} />
-        <div className='sh-mentor-container' >
-          {generateMentors()}
-        </div>
+      <div className='sh-mentor-container' >
+        {generateMentors()}
+      </div>
 
     </div>
   )

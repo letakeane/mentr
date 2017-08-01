@@ -13,15 +13,16 @@ export default class MentorHome extends Component {
 
   getMentor() {
     const { user } = this.props;
+
     fetch(`/api/v1/mentors/${user.ghId}`)
-    .then(resp => resp.json())
-    .then(mentors => {
-      console.log('fetch results: ', mentors);
-      this.setState({ mentor: mentors[0] });
-    })
-    .catch(error => {
-      response.status(500).json({ error });
-    });
+      .then(resp => resp.json())
+      .then(mentors => {
+        console.log('fetch results: ', mentors);
+        this.setState({ mentor: mentors[0] });
+      })
+      .catch(error => {
+        response.status(500).json({ error });
+      });
   }
 
   componentWillMount() {

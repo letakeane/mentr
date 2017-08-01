@@ -11,7 +11,7 @@ var exportedStyles = require('!!css-loader!./styles/index.css');
 let history = createHistory();
 
 render(<BrowserRouter history={history} >
-        <div>
-            <Route to='/' component={App}/>
-        </div>
-     </BrowserRouter>, document.getElementById('main'))
+  <div>
+    <Route to='/' component={App}/>
+  </div>
+</BrowserRouter>, document.getElementById('main'))

@@ -41,10 +41,11 @@ export default class App extends Component {
   setAppState() {
     const codeParam = this.props.location.search;
     const githubAuthCode = codeParam.split("=")[1];
+
     if (!this.state.githubAuthCode) {
       this.setState({
         githubAuthCode
-       });
+      });
     } else {
       this.setState({
         githubAuthCode: undefined
@@ -54,23 +55,23 @@ export default class App extends Component {
 
   setCurrentMentor(currentMentor) {
     this.setState({
-      currentMentor: currentMentor
+      currentMentor
     });
     this.props.history.replace('/mentor-profile');
   }
 
   getAllMentors() {
     fetch('/api/v1/mentors')
-    .then(response => response.json())
-    .then(data => {
-      this.mentors = data;
-      this.setState({
-        firstMentor: data[0]
+      .then(response => response.json())
+      .then(data => {
+        this.mentors = data;
+        this.setState({
+          firstMentor: data[0]
+        })
       })
-    })
-    .catch(error => {
-      response.status(500).json({ error });
-    });
+      .catch(error => {
+        response.status(500).json({ error });
+      });
   }
 
   componentDidMount() {
@@ -92,13 +93,14 @@ export default class App extends Component {
     let selectedKeys = setSelectedKeys(searchParams);
 
     const searchedMentors = filterMentors(selectedKeys, searchParams);
+
     this.setState({
       matchingMentors: searchedMentors
     });
   }
 
   showSingleMentor(mentor) {
-    if(this.props.location.pathname === '/'  && mentor) {
+    if (this.props.location.pathname === '/'  && mentor) {
       return (
         <div>
           <MentorCard mentor={mentor} />
@@ -122,10 +124,10 @@ export default class App extends Component {
           clearState={this.clearState} />
         <Switch>
           <Route path="/callback" render={(props) => <Callback
-              setUser={this.setUser}
-              user={user}
-              history={history}
-              code={githubAuthCode} /> }/>
+            setUser={this.setUser}
+            user={user}
+            history={history}
+            code={githubAuthCode} /> }/>
           <Route path='/student-profile' render={(props) => <StudentHome
             user={user}
             mentors={this.mentors}
