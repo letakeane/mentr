@@ -59,8 +59,8 @@ export default class AddStudent extends Component {
     fetch(`/api/v1/students/${ghId}`)
       .then(response => response.json())
       .then(student => {
+        console.log(student);
         if (student.length === 1) {
-          console.log(student);
           this.setState({
             student: Object.assign(this.state.student, student[0]),
             PATCH: true
