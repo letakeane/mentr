@@ -24888,6 +24888,7 @@ var App = function (_Component) {
     key: 'setAppState',
     value: function setAppState() {
       var codeParam = this.props.location.search;
+      console.log('codeParam: ', codeParam);
       var githubAuthCode = codeParam.split("=")[1];
       if (!this.state.githubAuthCode) {
         this.setState({
