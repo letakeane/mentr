@@ -26,14 +26,14 @@ export default class EditMentor extends Component {
       },
       errorStatus: '',
       PATCH: false,
-      turing: false,
-      remote: false,
-      'off-campus': false,
+      turing: '',
+      remote: '',
+      'off-campus': '',
       slack: '',
       email: '',
       phone: '',
-      y: false,
-      n: false
+      y: '',
+      n: ''
     };
   }
 
