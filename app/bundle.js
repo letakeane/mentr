@@ -25055,7 +25055,7 @@ var Header = exports.Header = function Header(_ref) {
     if (!user) {
       return _react2.default.createElement(
         "a",
-        { id: "log-in", href: "http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=http://localhost:1701/callback" },
+        { id: "log-in", href: "http://github.com/login/oauth/authorize?client_id=5a67289f9670bc02530b&redirect_uri=https://turing-mentr.herokuapp.com/callback" },
         "LOG IN"
       );
     } else {
