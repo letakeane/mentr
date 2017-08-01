@@ -29,9 +29,10 @@ export default class App extends Component {
   clearState() {
     this.props.history.replace('/');
     this.setState({
-      matchingMentors: [],
       githubAuthCode: undefined,
-      user: undefined
+      user: undefined,
+      matchingMentors: [],
+      currentMentor: {}
     })
   }
 
