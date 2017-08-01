@@ -16,7 +16,7 @@ export const Callback = props => {
       }
     })
     .catch(error => {
-      response.status(500).json({ error });
+      console.log('Error retreiving github authorization code: ', error);
     });
   };
 
@@ -37,7 +37,7 @@ export const Callback = props => {
           }
         })
         .catch(error => {
-          response.status(500).json({ error });
+          console.log('Error retreiving info: ', error);
         });
       }
     });
@@ -66,7 +66,7 @@ export const Callback = props => {
       postLoginRedirect(user.ghId);
     })
     .catch(error => {
-      resp.status(500).json({ error });
+      console.log('Error retreiving github authorization token: ', error);
     });
   };
 

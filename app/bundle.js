@@ -7567,7 +7567,6 @@ var MentorCard = function (_Component) {
           ghId = _props$mentor.ghId;
 
       var view = this.state.showMore ? 'Show Less' : 'Show More';
-      console.log('mentorcard', this.props);
       if (!this.state.showMore) {
         return _react2.default.createElement(
           'div',
@@ -11618,28 +11617,23 @@ var Callback = exports.Callback = function Callback(props) {
     if (!code || props.user) {
       return;
     }
-    console.log(code, 'code 1st');
     fetch('/gh_auth_code/' + code, { method: 'POST' }).then(function (resp) {
       return resp.json();
     }).then(function (data) {
-      console.log('response from /gh_auth_code/CODE: ', data);
       var wholeString = data.split("=")[1];
       if (!wholeString.includes('error')) {
         fetchUser(wholeString.split('&')[0]);
       }
     }).catch(function (error) {
-      response.status(500).json({ error: error });
+      console.log('Error retreiving github authorization code: ', error);
     });
   };
 
   var postLoginRedirect = function postLoginRedirect(ghId) {
-    console.log(ghId, 'ghid 3rd');
     fetch('/api/v1/students/' + ghId).then(function (response) {
       return response.json();
     }).then(function (data) {
-      console.log('response from student fetch: ', data);
       if (data[0]) {
-        console.log('trying to redirect to student profile!');
         props.history.replace('/student-profile');
       } else {
         fetch('/api/v1/mentors/' + ghId).then(function (resp) {
@@ -11651,14 +11645,13 @@ var Callback = exports.Callback = function Callback(props) {
             props.history.replace('/choose-status');
           }
         }).catch(function (error) {
-          response.status(500).json({ error: error });
+          console.log('Error retreiving info: ', error);
         });
       }
     });
   };
 
   var fetchUser = function fetchUser(token) {
-    console.log(token, 'fetchuser token 2nd');
 
     fetch('/gh_auth_token/' + token, {
       method: 'GET'
@@ -11683,7 +11676,7 @@ var Callback = exports.Callback = function Callback(props) {
       props.setUser(user);
       postLoginRedirect(user.ghId);
     }).catch(function (error) {
-      response.status(500).json({ error: error });
+      console.log('Error retreiving github authorization token: ', error);
     });
   };
 
@@ -12370,7 +12363,6 @@ var MentorHome = function (_Component) {
       fetch('/api/v1/mentors/' + user.ghId).then(function (resp) {
         return resp.json();
       }).then(function (mentors) {
-        console.log('fetch results: ', mentors);
         _this2.setState({ mentor: mentors[0] });
       }).catch(function (error) {
         response.status(500).json({ error: error });
@@ -24892,7 +24884,6 @@ var App = function (_Component) {
     key: 'setAppState',
     value: function setAppState() {
       var codeParam = this.props.location.search;
-      console.log('codeParam: ', codeParam);
       var githubAuthCode = codeParam.split("=")[1];
       if (!this.state.githubAuthCode) {
         this.setState({
@@ -27600,7 +27591,6 @@ var EditMentor = function (_Component) {
       var value = event.target.value;
 
       this.setState(_defineProperty({}, value, !this.state[value]));
-      console.log(this.state);
     }
   }, {
     key: 'checkDatabase',
