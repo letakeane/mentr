@@ -37,6 +37,7 @@ export default class EditMentor extends Component {
 
   updateProperty(event) {
     const { name, value } = event.target;
+
     this.setState({
       mentor: Object.assign(this.state.mentor, {
         [name]: value
@@ -47,7 +48,7 @@ export default class EditMentor extends Component {
   updateCheckboxes (event) {
     const { name, value } = event.target;
 
-    if(this.state.mentor.pairing_location.includes(`${value}`)) {
+    if (this.state.mentor.pairing_location.includes(`${value}`)) {
       return
     } else {
       this.setState({
@@ -70,19 +71,19 @@ export default class EditMentor extends Component {
           'CONTENT-TYPE': 'application/json'
         }
       })
-      .then(() => {
-        fetch(`/api/v1/mentors/${mentor.gh_id}`)
-        .then(response => response.json())
-        .then(currentMentor => {
-          this.props.setCurrentMentor(currentMentor[0]);
+        .then(() => {
+          fetch(`/api/v1/mentors/${mentor.gh_id}`)
+            .then(response => response.json())
+            .then(currentMentor => {
+              this.props.setCurrentMentor(currentMentor[0]);
+            })
+            .catch(error => console.log(error))
         })
-        .catch(error => console.log(error))
-      })
-      .catch(error => {
-        this.setState({
-          errorStatus: 'Error editing profile; please make sure the form is accurately filled out'
+        .catch(error => {
+          this.setState({
+            errorStatus: 'Error editing profile; please make sure the form is accurately filled out'
+          })
         })
-      })
     } else {
       fetch('/api/v1/mentors', {
         method: 'POST',
@@ -91,25 +92,26 @@ export default class EditMentor extends Component {
           'CONTENT-TYPE': 'application/json'
         }
       })
-      .then(() => {
-        fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
-        .then(response => response.json())
-        .then(currentMentor => {
-          console.log('Trying to set current mentor: ', currentMentor[0]);
-          this.props.setCurrentMentor(currentMentor[0]);
+        .then(() => {
+          fetch(`/api/v1/mentors/${this.state.mentor.gh_id}`)
+            .then(response => response.json())
+            .then(currentMentor => {
+              console.log('Trying to set current mentor: ', currentMentor[0]);
+              this.props.setCurrentMentor(currentMentor[0]);
+            })
+            .catch(error => console.log(error))
         })
-        .catch(error => console.log(error))
-      })
-      .catch(error => {
-        this.setState({
-          errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
+        .catch(error => {
+          this.setState({
+            errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
+          })
         })
-      })
     }
   }
 
   toggleClass(event) {
     const { value } = event.target;
+
     this.setState({
       [value]: !this.state[value]
     })
@@ -119,24 +121,24 @@ export default class EditMentor extends Component {
     const { ghId } = this.props.user;
 
     fetch(`/api/v1/mentors/${ghId}`)
-    .then(response => response.json())
-    .then(mentor => {
-      if (mentor.length === 1) {
-        this.setState({
-          mentor: Object.assign(this.state.mentor, mentor[0]),
-          PATCH: true
-        })
-        this.checkPreferredContact()
-        this.checkCheckboxes();
-      } else {
-        this.setState({ PATCH: false })
-        return
-      }
-    })
+      .then(response => response.json())
+      .then(mentor => {
+        if (mentor.length === 1) {
+          this.setState({
+            mentor: Object.assign(this.state.mentor, mentor[0]),
+            PATCH: true
+          })
+          this.checkPreferredContact()
+          this.checkCheckboxes();
+        } else {
+          this.setState({ PATCH: false })
+          return
+        }
+      })
   }
 
   checkPreferredContact() {
-    if(this.state.mentor.preferred_contact.includes('slack')) {
+    if (this.state.mentor.preferred_contact.includes('slack')) {
       this.setState({
         slack: true
       })
@@ -152,7 +154,7 @@ export default class EditMentor extends Component {
   }
 
   checkCheckboxes() {
-    if(this.state.mentor.pairing_location.includes('turing')) {
+    if (this.state.mentor.pairing_location.includes('turing')) {
       this.setState({
         turing: true
       })
@@ -197,7 +199,7 @@ export default class EditMentor extends Component {
           onSubmit={event => {
             this.addMentor(event);
           }}
-          >
+        >
           <label>
             Preferred Name*
             <input

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export const Callback = props => {
   const login = (code) => {
-    if(!code || props.user) {
+    if (!code || props.user) {
       return
     }
     fetch(`/gh_auth_code/${code}`, { method: 'POST' })
@@ -18,6 +18,7 @@ export const Callback = props => {
     .catch(error => {
       console.log('Error retreiving github authorization code: ', error);
     });
+
   };
 
   const postLoginRedirect = (ghId) => {

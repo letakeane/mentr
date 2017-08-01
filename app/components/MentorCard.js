@@ -11,6 +11,7 @@ export default class MentorCard extends Component  {
 
   toggleView() {
     let view = !this.state.showMore;
+
     this.setState({
       showMore: view
     });
@@ -19,6 +20,7 @@ export default class MentorCard extends Component  {
   render() {
     const { preferred_name, bio, avatar_url, availability, company, dev_type, email, slack, location, phone, pairing_location, position, preferred_contact, stack, ghId } = this.props.mentor;
     let view = this.state.showMore ? 'Show Less' : 'Show More';
+
     if(!this.state.showMore) {
       return (
         <div className='mc-wrapper' >
@@ -38,7 +40,7 @@ export default class MentorCard extends Component  {
             </h3>
             <h3 className='mc-h3' >Pairing Location:
               <p className='mc-details' >{pairing_location}</p>
-          </h3>
+            </h3>
           </div>
 
           <button

@@ -21,6 +21,7 @@ export default class AddStudent extends Component {
 
   updateProperty(event) {
     const { name, value } = event.target;
+
     this.setState({
       mentor: Object.assign(this.state.student, {
         [name]: value
@@ -40,15 +41,15 @@ export default class AddStudent extends Component {
         'CONTENT-TYPE': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(students => {
-      this.props.history.replace('/student-profile');
-    })
-    .catch(error => {
-      this.setState({
-        errorStatus: 'Error adding student'
+      .then(response => response.json())
+      .then(students => {
+        this.props.history.replace('/student-profile');
       })
-    })
+      .catch(error => {
+        this.setState({
+          errorStatus: 'Error adding student'
+        })
+      })
   }
 
 
@@ -58,7 +59,7 @@ export default class AddStudent extends Component {
         <h2>Create a Student</h2>
         <form
           onSubmit={event => this.addStudent(event)}
-          >
+        >
           <label>
             Preferred Name
             <input
