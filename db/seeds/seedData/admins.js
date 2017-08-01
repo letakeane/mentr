@@ -22,8 +22,3 @@ const admins = [
 ]
 
 module.exports = admins;
-
-//  table.increments('id').primary();
-//       table.integer('gh_id');
-//       table.string('preferred_name');
-//       table.string('avatar_url');
