@@ -29,9 +29,9 @@ export default class EditMentor extends Component {
       turing: false,
       remote: false,
       'off-campus': false,
-      slack: false,
-      email: false,
-      phone: false,
+      slack: '',
+      email: '',
+      phone: '',
       y: false,
       n: false
     };
