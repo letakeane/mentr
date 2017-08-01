@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Header } from './Header.js';
 import { Callback } from './Callback.js';
-import { Dummy } from './Dummy.js';
 import { StudentHome } from './StudentHome.js';
 import MentorHome from './MentorHome.js';
 import { ChooseStatus } from './ChooseStatus.js';
@@ -20,7 +19,7 @@ export default class App extends Component {
       matchingMentors: [],
       currentMentor: {},
       firstMentor: undefined
-    }
+    };
     this.mentors = [];
     this.updateMentors = this.updateMentors.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -36,7 +35,7 @@ export default class App extends Component {
       user: undefined,
       matchingMentors: [],
       currentMentor: {}
-    })
+    });
   }
 
   setAppState() {
@@ -56,12 +55,11 @@ export default class App extends Component {
   setCurrentMentor(currentMentor) {
     this.setState({
       currentMentor: currentMentor
-    })
-    this.props.history.replace('/mentor-profile')
+    });
+    this.props.history.replace('/mentor-profile');
   }
 
   getAllMentors() {
-    console.log(this.state.user, 'user get all')
     fetch('/api/v1/mentors')
     .then(response => response.json())
     .then(data => {
@@ -69,6 +67,9 @@ export default class App extends Component {
       this.setState({
         firstMentor: data[0]
       })
+    })
+    .catch(error => {
+      response.status(500).json({ error });
     });
   }
 
@@ -78,7 +79,7 @@ export default class App extends Component {
   }
 
   updateMentors(mentors) {
-    this.setState({ mentors: [mentors]})
+    this.setState({ mentors: [mentors]});
   }
 
   setUser(user) {

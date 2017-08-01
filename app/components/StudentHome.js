@@ -25,7 +25,7 @@ export const StudentHome = (props) => {
   };
 
   return (
-    <div>
+    <div className='student-home-container' >
       <h2>Student Home</h2>
       <img src={props.user.avatar_url} id='user-image' />
       <Link
@@ -37,7 +37,7 @@ export const StudentHome = (props) => {
         matchingMentors={props.matchingMentors}
         getFilteredMentors={props.getFilteredMentors}
         mentors={props.mentors} />
-        <div>
+        <div className='sh-mentor-container' >
           {generateMentors()}
         </div>
 

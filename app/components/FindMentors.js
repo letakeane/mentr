@@ -126,7 +126,7 @@ export class FindMentors extends Component {
           <input
             className='buttons'
             type="submit"
-            value="Search for Mentors"
+            value="Filter Mentors"
           />
         </form>
 
