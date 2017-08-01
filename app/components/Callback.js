@@ -11,7 +11,9 @@ export const Callback = props => {
     })
     .then(data => {
       let wholeString = data.split("=")[1];
+      if(!wholeString.includes('error')) {
       fetchUser(wholeString.split('&')[0]);
+      }
     })
   };
 
@@ -62,6 +64,6 @@ export const Callback = props => {
 
   login(props.code);
   return(
-    <div> the callback is here </div>
+    <div></div>
   )
 }
