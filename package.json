@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engines": {
     "node": "6.11.2",
-    "npm": "3.10.x"
+    "npm": "3.10.10"
   },
   "description": "Help finding a mentor",
   "main": "index.js",
