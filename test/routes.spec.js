@@ -35,6 +35,7 @@ describe('top level befores', () => {
   });
 
   describe('base sad path', () => {
+
     it('/api/v1/sadthings should not work', (done) => {
       chai.request(server)
         .get('/api/v1/sadthings')
@@ -46,6 +47,7 @@ describe('top level befores', () => {
   });
 
   describe('base path', () => {
+
     it('/ should return html', (done) => {
       chai.request(server)
         .get('/')
@@ -55,6 +57,37 @@ describe('top level befores', () => {
           done();
         });
     });
+
+    it('/callback should return html', (done) => {
+      chai.request(server)
+        .get('/')
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.should.be.html;
+          done();
+        });
+    });
+
+    it('/student-profile should return html', (done) => {
+      chai.request(server)
+        .get('/')
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.should.be.html;
+          done();
+        });
+    });
+
+    it('/mentor-profile should return html', (done) => {
+      chai.request(server)
+        .get('/')
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.should.be.html;
+          done();
+        });
+    });
+
   });
 
   describe('program routes', (done) => {
@@ -133,7 +166,7 @@ describe('top level befores', () => {
         .send(testMentorComplete)
         .end((err, response) => {
           response.should.have.status(201);
-          response.body.id.should.equal(4)
+          response.body.id.should.equal(4);
           done();
         });
     });
@@ -248,7 +281,7 @@ describe('top level befores', () => {
         .send(testStudentComplete)
         .end((err, response) => {
           response.should.have.status(201);
-          response.body.id.should.equal(4)
+          response.body.id.should.equal(4);
           done();
         });
     });
