@@ -18,7 +18,7 @@ export default class EditMentor extends Component {
         availability: '',
         company: '',
         position: '',
-        dev_type: '',
+        dev_type: 'Front-End',
         stack: '',
         pairing_location: '',
         gh_id: this.props.user.ghId,
@@ -54,14 +54,13 @@ export default class EditMentor extends Component {
         fetch(`/api/v1/mentors/${mentor.gh_id}`)
         .then(response => response.json())
         .then(currentMentor => {
-          console.log('Trying to set current mentor: ', currentMentor[0]);
           this.props.setCurrentMentor(currentMentor[0]);
         })
         .catch(error => console.log(error))
       })
       .catch(error => {
         this.setState({
-          errorStatus: 'Error adding mentor'
+          errorStatus: 'Error editing profile; please make sure the form is accurately filled out'
         })
       })
     } else {
@@ -83,7 +82,7 @@ export default class EditMentor extends Component {
       })
       .catch(error => {
         this.setState({
-          errorStatus: 'Error adding mentor'
+          errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
         })
       })
     }
@@ -107,6 +106,18 @@ export default class EditMentor extends Component {
     })
   }
 
+  errorMessage() {
+    if (this.state.errorStatus.length) {
+      return (
+        <p id='form-error'>{this.state.errorStatus}</p>
+      )
+    } else {
+      return (
+        <div></div>
+      )
+    }
+  }
+
   componentWillMount() {
     this.checkDatabase()
   }
@@ -115,12 +126,24 @@ export default class EditMentor extends Component {
     return (
       <div>
         <h2>Create Mentor Profile</h2>
+        {this.errorMessage()}
         <form
           id="create-profile-form"
           onSubmit={event => {
             this.addMentor(event);
           }}
           >
+          <label>
+            Preferred Name*
+            <input
+              type="text"
+              name="preferred_name"
+              placeholder="Preferred Name"
+              value={this.state.mentor.preferred_name}
+              onChange={event => this.updateProperty(event)}
+              required
+            />
+          </label>
           <label>
             Location
             <input
@@ -139,49 +162,8 @@ export default class EditMentor extends Component {
               form="create-profile-form"
               type="textarea"
               name="bio"
-              placeholder="Bio"
+              placeholder="Interests, soft skills, hobbies, etc"
               value={this.state.mentor.bio}
-              onChange={event => this.updateProperty(event)}
-            />
-          </label>
-          <label>
-            Preferred Method of Contact
-            <div className='preferred-contact-radios'>
-              <input
-                type='radio'
-                id='profile-prefer-slack'
-                name='preferred_contact'
-                value='slack'
-                onChange={event => this.updateProperty(event)}
-              />
-              <label htmlFor='profile-prefer-slack'>Slack</label>
-
-              <input
-                id='profile-prefer-email'
-                type='radio'
-                name='preferred_contact'
-                value='email'
-                onChange={event => this.updateProperty(event)}
-              />
-              <label htmlFor='profile-prefer-email'>Email</label>
-
-              <input
-                id='profile-prefer-phone'
-                type='radio'
-                name='preferred_contact'
-                value='phone'
-                onChange={event => this.updateProperty(event)}
-              />
-              <label htmlFor='profile-prefer-phone'>Phone</label>
-            </div>
-          </label>
-          <label>
-            Preferred Name
-            <input
-              type="text"
-              name="preferred_name"
-              placeholder="Preferred Name"
-              value={this.state.mentor.preferred_name}
               onChange={event => this.updateProperty(event)}
             />
           </label>
@@ -219,7 +201,39 @@ export default class EditMentor extends Component {
             />
           </label>
           <label>
-            Are you currently accepting new mentees?
+            Preferred Method of Contact*
+            <div className='preferred-contact-radios'>
+              <input
+                type='radio'
+                id='profile-prefer-slack'
+                name='preferred_contact'
+                value='slack'
+                onChange={event => this.updateProperty(event)}
+                required
+              />
+              <label htmlFor='profile-prefer-slack'>Slack</label>
+
+              <input
+                id='profile-prefer-email'
+                type='radio'
+                name='preferred_contact'
+                value='email'
+                onChange={event => this.updateProperty(event)}
+              />
+              <label htmlFor='profile-prefer-email'>Email</label>
+
+              <input
+                id='profile-prefer-phone'
+                type='radio'
+                name='preferred_contact'
+                value='phone'
+                onChange={event => this.updateProperty(event)}
+              />
+              <label htmlFor='profile-prefer-phone'>Phone</label>
+            </div>
+          </label>
+          <label>
+            Are you currently accepting new mentees?*
             <div className='new-mentees-radios'>
               <input
                 id='profile-new-yes'
@@ -247,7 +261,7 @@ export default class EditMentor extends Component {
               form="create-profile-form"
               type="textarea"
               name="availability"
-              placeholder="Availability"
+              placeholder="Weekdays after 5pm"
               value={this.state.mentor.availability}
               onChange={event => this.updateProperty(event)}
             />
@@ -275,14 +289,17 @@ export default class EditMentor extends Component {
             />
           </label>
           <label>
-            Type of Developer
-            <input
-              type="text"
+            Type of Developer*
+            <select
               name="dev_type"
-              placeholder="Type of Developer"
               value={this.state.mentor.dev_type}
               onChange={event => this.updateProperty(event)}
-            />
+              required
+            >
+              <option value="Front-End">Front-End</option>
+              <option value="Back-End">Back-End</option>
+              <option value="Full Stack">Full Stack</option>
+            </select>
           </label>
           <label>
             Stack
@@ -327,7 +344,7 @@ export default class EditMentor extends Component {
           </label>
           <input
             type="submit"
-            value="Create Mentor"
+            value="SUBMIT"
           />
         </form>
       </div>
