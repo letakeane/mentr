@@ -122,7 +122,7 @@ export default class AddStudent extends Component {
           </label>
           <input
             type="submit"
-            value="Create Student"
+            value="SUBMIT"
           />
         </form>
       </div>
