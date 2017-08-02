@@ -270,7 +270,7 @@ app.delete(`/api/v1/mentors/${apiKey}/:gh_id`, (request, response) => {
     });
 });
 
-app.delete(`/api/v1/students/${apiKey}/:gh_id`, (request, response) => {
+app.delete(`/api/v1/students/:gh_id`, (request, response) => {
   const { gh_id } = request.params;
 
   database('students').where('gh_id', gh_id).del()
