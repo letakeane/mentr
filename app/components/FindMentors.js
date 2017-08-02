@@ -26,7 +26,6 @@ export class FindMentors extends Component {
     let queries = Object.keys(searchParams).filter( param => {
       return searchParams[param];
     });
-    console.log(queries, 'queries')
     return queries;
   }
 
