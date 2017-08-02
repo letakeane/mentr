@@ -6,7 +6,7 @@ import MentorHome from './MentorHome.js';
 import { ChooseStatus } from './ChooseStatus.js';
 import EditMentor from './EditMentor';
 import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
-import AddStudent from './AddStudent';
+import EditStudent from './EditStudent';
 import MentorCard from './MentorCard';
 
 
@@ -138,7 +138,7 @@ export default class App extends Component {
             getFilteredMentors={this.getFilteredMentors} />}/>
           <Route path='/mentor-profile' render={(props) => <MentorHome className='mentor-home-' user={user} currentMentor={currentMentor}/>}/>
           <Route path='/choose-status' render={(props) => <ChooseStatus className='choose-status-' user={user} />}/>
-          <Route path='/create-student' render={(props) => <AddStudent className='add-student-' user={user} history={history} />}/>
+          <Route path='/edit-student' render={(props) => <EditStudent className='edit-student-' user={user} history={history} />}/>
           <Route path='/edit-mentor' render={(props) => <EditMentor className='edit-mentor-' user={user} updateMentors={this.updateMentors} history={history} setCurrentMentor={this.setCurrentMentor}/>}/>
 
         </Switch>

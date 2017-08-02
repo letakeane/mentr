@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 
-export default class AddStudent extends Component {
+export default class EditStudent extends Component {
   constructor(props) {
     super(props)
 
@@ -24,33 +24,60 @@ export default class AddStudent extends Component {
     const { name, value } = event.target;
 
     this.setState({
-      mentor: Object.assign(this.state.student, {
+      student: Object.assign(this.state.student, {
         [name]: value
       })
     })
   }
 
-  addStudent(event) {
+  editStudent(event) {
     event.preventDefault();
-    const { updateStudents } = this.props;
     const student = this.state.student;
 
-    fetch('/api/v1/students', {
-      method: 'POST',
-      body: JSON.stringify(student),
-      headers: {
-        'CONTENT-TYPE': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(students => {
-        this.props.history.replace('/student-profile');
+    if (this.state.PATCH) {
+      fetch(`/api/v1/students/${student.gh_id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(student),
+        headers: {
+          'CONTENT-TYPE': 'application/json'
+        }
       })
-      .catch(error => {
-        this.setState({
-          errorStatus: 'Error adding student'
+        .then(() => {
+          fetch(`/api/v1/students/${student.gh_id}`)
+            .then(response => response.json())
+            .then(currentMentor => {
+              this.props.setCurrentMentor(currentMentor[0]);
+            })
+            .catch(error => console.log(error))
         })
+        .catch(error => {
+          this.setState({
+            errorStatus: 'Error editing profile; please make sure the form is accurately filled out'
+          })
+        })
+    } else {
+      fetch('/api/v1/students', {
+        method: 'POST',
+        body: JSON.stringify(student),
+        headers: {
+          'CONTENT-TYPE': 'application/json'
+        }
       })
+        .then(() => {
+          fetch(`/api/v1/students/${this.state.student.gh_id}`)
+            .then(response => response.json())
+            .then(currentMentor => {
+              console.log('Trying to set current student: ', currentMentor[0]);
+              this.props.setCurrentMentor(currentMentor[0]);
+            })
+            .catch(error => console.log(error))
+        })
+        .catch(error => {
+          this.setState({
+            errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
+          })
+        })
+    }
   }
 
   checkDatabase() {
@@ -80,7 +107,7 @@ export default class AddStudent extends Component {
       <div>
         <h2>Create a Student</h2>
         <form
-          onSubmit={event => this.addStudent(event)}
+          onSubmit={event => this.editStudent(event)}
         >
           <label>
             Preferred Name
