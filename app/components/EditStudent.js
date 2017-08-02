@@ -43,7 +43,11 @@ export default class EditStudent extends Component {
         }
       })
       .then(() => this.props.history.replace('/student-profile'))
-      .catch(error => { error })
+      .catch(error => {
+        this.setState({
+          errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
+        })
+      })
     } else {
       fetch('/api/v1/students', {
         method: 'POST',
