@@ -23,7 +23,7 @@ export const Header = ({ user, clearState }) => {
 
   return (
     <div className='app-header'>
-      <h1>mentr</h1>
+      <a href='/'><h1>mentr</h1></a>
       {logInOut()}
     </div>
   )
