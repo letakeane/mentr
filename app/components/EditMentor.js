@@ -61,7 +61,7 @@ export default class EditMentor extends Component {
     }
   }
 
-  addMentor(event) {
+  editMentor(event) {
     event.preventDefault();
     const { mentor } = this.state;
 
@@ -214,7 +214,7 @@ export default class EditMentor extends Component {
         <form
           id="create-profile-form"
           onSubmit={event => {
-            this.addMentor(event);
+            this.editMentor(event);
           }}
         >
           <label>
@@ -263,7 +263,7 @@ export default class EditMentor extends Component {
             />
           </label>
           <label>
-            Email address
+            Email Address
             <input
               id="profile-email"
               type="email"

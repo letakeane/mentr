@@ -29,7 +29,7 @@ export const StudentHome = (props) => {
       <h2>Student Home</h2>
       <img src={props.user.avatar_url} id='user-image' />
       <Link
-        to='/create-student'
+        to='/edit-student'
         className='student-edit-link'>
         EDIT PROFILE
       </Link>

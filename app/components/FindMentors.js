@@ -22,22 +22,24 @@ export class FindMentors extends Component {
   }
 
   setSelectedKeys(searchParams) {
-    return Object.keys(searchParams).filter( param => {
+
+    let queries = Object.keys(searchParams).filter( param => {
       return searchParams[param];
     });
+    return queries;
   }
 
   filterMentors(selectedKeys, searchParams) {
     const targetMentors = [];
 
     this.allMentors.forEach( mentor => {
-      let pushing = true;
+      let pushing = 0;
 
       selectedKeys.forEach( key => {
-        if (!mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
-          pushing = false;
+        if (mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
+          pushing += 1;
         }
-        if (pushing) {
+        if (pushing === selectedKeys.length) {
           targetMentors.push(mentor);
         }
       });

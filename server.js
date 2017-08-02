@@ -272,8 +272,11 @@ app.delete('/api/v1/students/:gh_id', (request, response) => {
 
   database('students').where('gh_id', gh_id).del()
     .then(qty => {
-      response.status(204).json({ qty });
-    })
+      if (qty) {
+        response.status(204).json({ qty });
+      } else {
+        response.status(404).json({ error: 'that student was not found' })
+      }    })
     .catch(error => {
       response.status(500).json({ error });
     });
