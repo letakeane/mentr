@@ -103,8 +103,8 @@ export default class App extends Component {
     if (this.props.location.pathname === '/'  && mentor) {
       return (
         <div>
-          <MentorCard mentor={mentor} />
           <p className='login-prompt' >*LOGIN TO SEE MORE MENTORS*</p>
+          <MentorCard mentor={mentor} />
         </div>
       )
     }
