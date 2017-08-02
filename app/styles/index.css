@@ -46,6 +46,7 @@ h2 {
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #032647;
   background-image: linear-gradient(195deg, #1B5287 0%, #000000 100%);
   padding: 20px;
