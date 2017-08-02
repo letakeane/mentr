@@ -6,8 +6,8 @@
 3. Run `$ touch .env`.
 4. In that `.env` file, add `API_KEY = ` and set it to whatever string you like.
 5. In the `Header.js` and `server.js` files, change the `redirect_uri` to `http://localhost:1701/callback`.
-    * `Header.js`: ![Header.js change](http://i.imgur.com/ZgVJANQ.png)
-    * `server.js`: ![server.js change](http://i.imgur.com/JXXPWP4.png)
+    * `Header.js`: ![Header.js change](http://i.imgur.com/HCpP3vB.jpg)
+    * `server.js`: ![server.js change](http://i.imgur.com/sggXxgI.jpg)
 6. Run `$ npm start`.
 7. View the app at `http://localhost:1701`!
 8. To test, run `$ npm test`.
