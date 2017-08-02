@@ -43,6 +43,7 @@ export class FindMentors extends Component {
         }
         if (pushing) {
           targetMentors.push(mentor);
+          pushing = true;
         }
       });
     });
