@@ -189,6 +189,7 @@ input[type=checkbox] {
   margin-bottom: 25px;
   font-weight: 700;
   text-align: center;
+  color: gray;
 }
 
 .mc-details {
