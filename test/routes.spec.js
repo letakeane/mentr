@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test';
+process.env.API_KEY = 'test_key';
 const express = require('express');
 const bodyParser = require('body-parser');
 const knex = require('knex');
@@ -13,6 +14,8 @@ const should = chai.should();
 const { testMentorComplete, testMentorPatch } = require('./testData/testMentor.js');
 const { testStudentComplete, testStudentPatch } = require('./testData/testStudent.js');
 
+
+console.log(process.env.API_KEY, ' process key')
 chai.use(chaiHttp);
 
 describe('top level befores', () => {
@@ -173,7 +176,7 @@ describe('top level befores', () => {
 
     it('should delete a mentor', (done) => {
       chai.request(server)
-        .delete('/api/v1/mentors/17582916')
+        .delete(`/api/v1/mentors/${process.env.API_KEY}/17582916/`)
         .send()
         .end((error, response) => {
           response.should.have.status(204);
@@ -188,7 +191,7 @@ describe('top level befores', () => {
 
     it('should not delete a mentor that does not exist', (done) => {
       chai.request(server)
-        .delete('/api/v1/mentors/999999999')
+        .delete(`/api/v1/mentors/${process.env.API_KEY}/99999999/`)
         .send()
         .end((error, response) => {
           response.should.have.status(404);

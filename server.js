@@ -7,6 +7,7 @@ const database = require('knex')(configuration);
 const domain = process.env.DOMAIN_ENV || 'localhost:1701';
 const path = require('path');
 const request = require('request');
+require('dotenv');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,6 +22,8 @@ app.use((req, res, next) => {
 });
 
 app.set('port', process.env.PORT || 1701);
+
+const apiKey = process.env.API_KEY || 'test_key';
 
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
@@ -251,7 +254,7 @@ app.patch('/api/v1/students/:gh_id', (request, response) => {
     });
 });
 
-app.delete('/api/v1/mentors/:gh_id', (request, response) => {
+app.delete(`/api/v1/mentors/${apiKey}/:gh_id`, (request, response) => {
   const { gh_id } = request.params;
 
   database('mentors').where('gh_id', gh_id).del()
@@ -267,7 +270,7 @@ app.delete('/api/v1/mentors/:gh_id', (request, response) => {
     });
 });
 
-app.delete('/api/v1/students/:gh_id', (request, response) => {
+app.delete(`/api/v1/students/${apiKey}/:gh_id`, (request, response) => {
   const { gh_id } = request.params;
 
   database('students').where('gh_id', gh_id).del()
