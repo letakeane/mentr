@@ -1,5 +1,7 @@
 ### This app is designed to help connect Turing studings with mentors associated with the school
 
+#### Views
+
 * This is the view students see on their home page
 
 ![Image](images/StudentHomeView.png)
