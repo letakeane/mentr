@@ -114,9 +114,18 @@ export default class EditMentor extends Component {
   toggleClass(event) {
     const { value } = event.target;
 
-    this.setState({
-      [value]: !this.state[value]
-    })
+    if (this.state[value] === '') {
+      this.setState({
+        [value]: true
+      })
+    } else if (this.state[value] === true) {
+      this.setState({
+        [value]: ''
+      })
+    }
+    // this.setState({
+    //   [value]: !this.state[value]
+    // })
   }
 
   checkDatabase() {
