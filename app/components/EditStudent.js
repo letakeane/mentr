@@ -42,19 +42,8 @@ export default class EditStudent extends Component {
           'CONTENT-TYPE': 'application/json'
         }
       })
-        .then(() => {
-          fetch(`/api/v1/students/${student.gh_id}`)
-            .then(response => response.json())
-            .then(currentMentor => {
-              this.props.setCurrentMentor(currentMentor[0]);
-            })
-            .catch(error => console.log(error))
-        })
-        .catch(error => {
-          this.setState({
-            errorStatus: 'Error editing profile; please make sure the form is accurately filled out'
-          })
-        })
+      .then(() => this.props.history.replace('/student-profile'))
+      .catch(error => { error })
     } else {
       fetch('/api/v1/students', {
         method: 'POST',
@@ -63,20 +52,12 @@ export default class EditStudent extends Component {
           'CONTENT-TYPE': 'application/json'
         }
       })
-        .then(() => {
-          fetch(`/api/v1/students/${this.state.student.gh_id}`)
-            .then(response => response.json())
-            .then(currentMentor => {
-              console.log('Trying to set current student: ', currentMentor[0]);
-              this.props.setCurrentMentor(currentMentor[0]);
-            })
-            .catch(error => console.log(error))
+      .then(() => this.props.history.replace('/student-profile'))
+      .catch(error => {
+        this.setState({
+          errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
         })
-        .catch(error => {
-          this.setState({
-            errorStatus: 'Error creating profile; please make sure the form is accurately filled out'
-          })
-        })
+      })
     }
   }
 
