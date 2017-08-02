@@ -34,16 +34,15 @@ export class FindMentors extends Component {
     const targetMentors = [];
 
     this.allMentors.forEach( mentor => {
-      let pushing = true;
+      let pushing = 0;
 
       selectedKeys.forEach( key => {
-        console.log(mentor.preferred_name, mentor[key], ' <men val, search val>',  searchParams[key])
-        if (!mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
-          pushing = false;
+        if (mentor[key].toLowerCase().includes(searchParams[key].toLowerCase())) {
+          pushing += 1;
+        // console.log(mentor.preferred_name, mentor[key], ' <men val, search val>',  searchParams[key])
         }
-        if (pushing) {
+        if (pushing === selectedKeys.length) {
           targetMentors.push(mentor);
-          pushing = true;
         }
       });
     });
