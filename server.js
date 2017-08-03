@@ -220,7 +220,7 @@ app.post('/api/v1/students', (request, response) => {
       if (student) {
         response.status(201).json({ id: student[0] });
       } else {
-        response.status(201).json({ error: 'You are missing a property'});
+        response.status(422).json({ error: 'You are missing a property'});
       }
     })
     .catch(error => {
@@ -234,7 +234,7 @@ app.patch('/api/v1/mentors/:gh_id', (request, response) => {
 
   database('mentors').where('gh_id', gh_id).update(update)
     .then(update => {
-      response.status(201).json({ update });
+      response.status(204).json({ update });
     })
     .catch(error => {
       response.status(500).json({ error });
@@ -247,7 +247,7 @@ app.patch('/api/v1/students/:gh_id', (request, response) => {
 
   database('students').where('gh_id', gh_id).select().update(update, 'id')
     .then(update => {
-      response.status(201).json({ update });
+      response.status(204).json({ update });
     })
     .catch(error => {
       response.status(500).json({ error });

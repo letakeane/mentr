@@ -210,7 +210,7 @@ describe('top level befores', () => {
         .patch('/api/v1/mentors/17582916')
         .send(testMentorPatch)
         .end((err, response) => {
-          response.should.have.status(201);
+          response.should.have.status(204);
           chai.request(server)
             .get('/api/v1/mentors/17582916')
             .end((err, response) => {
@@ -228,7 +228,7 @@ describe('top level befores', () => {
         .patch('/api/v1/mentors/9999999')
         .send(testMentorPatch)
         .end((err, response) => {
-          response.should.have.status(201);
+          response.should.have.status(204);
           chai.request(server)
             .get('/api/v1/mentors/9999999')
             .end((err, response) => {
@@ -325,7 +325,7 @@ describe('top level befores', () => {
         .patch('/api/v1/students/22563791')
         .send(testStudentPatch)
         .end((err, response) => {
-          response.should.have.status(201);
+          response.should.have.status(204);
           chai.request(server)
             .get('/api/v1/students/22563791')
             .end((err, response) => {
@@ -343,7 +343,7 @@ describe('top level befores', () => {
         .patch('/api/v1/students/9999999')
         .send(testStudentPatch)
         .end((err, response) => {
-          response.should.have.status(201);
+          response.should.have.status(204);
           chai.request(server)
             .get('/api/v1/students/9999999')
             .end((err, response) => {
