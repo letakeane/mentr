@@ -4,7 +4,7 @@ const mentors = [
     preferred_name: 'Robbie Jaeger',
     preferred_contact: 'slack',
     bio: 'you will probably hear me coming before you ever actually see me',
-    location: 'Robbies house',
+    location: 'Denver, CO',
     avatar_url: 'https://avatars.githubusercontent.com/u/17582916?',
     slack: 'robbiejaeger',
     email: 'jaeger.rob@gmail.com',
@@ -17,6 +17,24 @@ const mentors = [
     stack: 'Ruby/Rails, Python/Django, yelling, yodeling, loud noises',
     pairing_location: 'screenhero'
   },
+  // {
+  //   gh_id: 17582916,
+  //   preferred_name: 'Robbie Jaeger',
+  //   preferred_contact: 'slack',
+  //   bio: 'you will probably hear me coming before you ever actually see me',
+  //   location: 'Robbies house',
+  //   avatar_url: 'https://avatars.githubusercontent.com/u/17582916?',
+  //   slack: 'robbiejaeger',
+  //   email: 'jaeger.rob@gmail.com',
+  //   phone: '303-555-5555',
+  //   accepting_new: 'y',
+  //   availability: 'weekdays after 5, weekends',
+  //   company: 'microsoft',
+  //   position: 'senior dev',
+  //   dev_type: 'backend',
+  //   stack: 'Ruby/Rails, Python/Django, yelling, yodeling, loud noises',
+  //   pairing_location: 'screenhero'
+  // },
   {
     gh_id: 8650958,
     preferred_name: 'Yung Jhun',
