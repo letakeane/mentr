@@ -9,26 +9,26 @@ const students = [
   //   program_id: 4,
   //   id: 1
   // }
+  // {
+  //   gh_id: 22563791,
+  //   preferred_name: 'Leta Keane',
+  //   avatar_url: 'https://avatars.githubusercontent.com/u/22563791?',
+  //   slack: 'letak',
+  //   email: 'leta.keane@gmail.com',
+  //   stack_interests: 'React, SCSS, Node.js',
+  //   program_id: 4,
+  //   id: 1
+  // }
   {
-    gh_id: 22563791,
-    preferred_name: 'Leta Keane',
-    avatar_url: 'https://avatars.githubusercontent.com/u/22563791?',
-    slack: 'letak',
-    email: 'leta.keane@gmail.com',
-    stack_interests: 'React, SCSS, Node.js',
+  gh_id: 23202538,
+  preferred_name: 'Spencer Hilvitz',
+  avatar_url: 'https://avatars.githubusercontent.com/u/23202538?',
+  slack: 'hilvitzs',
+  email: 'spencer.hilvitz@gmail.com',
+    stack_interests: 'React, socket.io, Node.js',
     program_id: 4,
     id: 1
   }
-  // {
-  // gh_id: 23202538,
-  // preferred_name: 'Spencer Hilvitz',
-  // avatar_url: 'https://avatars.githubusercontent.com/u/23202538?',
-  // slack: 'hilvitzs',
-  // email: 'spencer.hilvitz@gmail.com',
-  //   stack_interests: 'React, socket.io, Node.js',
-  //   program_id: 4,
-  //   id: 3
-  // }
 ]
 
 module.exports = students;
